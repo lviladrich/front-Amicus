@@ -1,0 +1,62 @@
+/* Pantalla Detalle del servicio */
+.migas { margin-bottom: 1rem; font-size: 0.85rem; }
+.migas ol { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0; padding: 0; list-style: none; color: var(--tinta-suave); }
+.migas li + li::before { content: '/'; margin-right: 0.35rem; }
+
+.galeria-principal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radio);
+  color: var(--pino);
+}
+.galeria-principal img { width: 100%; height: 100%; object-fit: cover; }
+
+.galeria-miniaturas { display: flex; gap: 0.5rem; margin-top: 0.5rem; overflow-x: auto; }
+.miniatura {
+  flex: 0 0 110px;
+  height: 70px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: var(--radio-chico);
+  background: var(--hoja);
+  cursor: pointer;
+}
+.miniatura img { width: 100%; height: 100%; object-fit: cover; }
+.miniatura-activa { border-color: var(--pino); }
+
+.profesional { border-bottom: 1px solid var(--borde); border-top: 1px solid var(--borde); margin-top: 1rem; }
+.avatar-grande { width: 48px; height: 48px; background: var(--pino); color: var(--blanco); font-size: 1rem; }
+.descripcion { white-space: pre-line; }
+
+/* Amarillo mas oscuro que la cinta para que las estrellas contrasten sobre blanco */
+.estrellas { display: inline-flex; gap: 2px; color: #A8730A; }
+
+.panel-compra { position: static; }
+@media (min-width: 992px) {
+  .panel-compra { position: sticky; top: 1.5rem; }
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-chico);
+  background: var(--blanco);
+}
+.stepper button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  color: var(--pino);
+  cursor: pointer;
+}
+.stepper button:disabled { color: var(--tinta-suave); opacity: 0.45; cursor: not-allowed; }
+.stepper output { min-width: 2.5rem; text-align: center; font-weight: 600; }

@@ -1,32 +1,65 @@
 import { useEffect, useState } from 'react'
-import { listarServicios } from '../api/amicus.js'
+import { buscarServicios } from '../api/amicus.js'
 import TarjetaServicio from './TarjetaServicio.jsx'
+import Cargando from './comunes/Cargando.jsx'
+import MensajeError from './comunes/MensajeError.jsx'
 
-function ListaServicios({ categoriaId }) {
-  const [servicios, setServicios] = useState(null)
-  const [error, setError] = useState(null)
+function ListaServicios({ categoriaId = '', zonaId = '' }) {
+  const [intento, setIntento] = useState(0)
+  // La respuesta guarda la clave de la busqueda que la origino: si no coincide con la actual, esta cargando
+  const [respuesta, setRespuesta] = useState(null)
+  const clave = `${categoriaId}|${zonaId}|${intento}`
 
   useEffect(() => {
-    listarServicios(categoriaId)
-      .then((datos) => {
-        setServicios(datos)
-        setError(null)
+    let vigente = true
+    // TODO (ver docs/PENDIENTES.md): filtro "solo con cupo" (conCupo) y paginacion (pagina)
+    buscarServicios({ categoriaId, zonaId })
+      .then((pagina) => {
+        if (vigente) setRespuesta({ clave, pagina })
       })
-      .catch(() => setError('No se pudieron cargar los servicios.'))
-  }, [categoriaId])
+      .catch((error) => {
+        if (vigente) setRespuesta({ clave, error: error.message })
+      })
+    return () => {
+      vigente = false
+    }
+  }, [categoriaId, zonaId, clave])
 
-  if (error) return <div className="alert alert-danger">{error}</div>
-  if (servicios === null) return <p>Cargando servicios...</p>
-  if (servicios.length === 0) return <p>No hay servicios para mostrar.</p>
+  const cargando = respuesta?.clave !== clave
+
+  let contenido
+  if (cargando) {
+    contenido = <Cargando texto="Cargando servicios..." />
+  } else if (respuesta.error) {
+    contenido = <MensajeError onReintentar={() => setIntento(intento + 1)}>{respuesta.error}</MensajeError>
+  } else if (respuesta.pagina.contenido.length === 0) {
+    contenido = <p className="text-secundario py-4">No encontramos servicios con esos filtros. Probá con otra categoría o barrio.</p>
+  } else {
+    contenido = (
+      <div className="row g-3">
+        {respuesta.pagina.contenido.map((servicio) => (
+          <div key={servicio.id} className="col-12 col-md-6 col-lg-4">
+            <TarjetaServicio servicio={servicio} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  const total = !cargando && !respuesta.error ? respuesta.pagina.totalElementos : null
 
   return (
-    <div className="row g-3">
-      {servicios.map((servicio) => (
-        <div key={servicio.id} className="col-12 col-sm-6 col-lg-4">
-          <TarjetaServicio servicio={servicio} />
-        </div>
-      ))}
-    </div>
+    <section aria-labelledby="titulo-servicios">
+      <div className="d-flex justify-content-between align-items-baseline mt-4 mb-3">
+        <h2 id="titulo-servicios" className="h4 mb-0">Servicios disponibles</h2>
+        {total !== null && (
+          <span className="text-secundario small" aria-live="polite">
+            {total === 1 ? '1 resultado' : `${total} resultados`}
+          </span>
+        )}
+      </div>
+      {contenido}
+    </section>
   )
 }
 
