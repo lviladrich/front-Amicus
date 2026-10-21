@@ -1,5 +1,6 @@
 // Todas las llamadas al back pasan por aca. Los endpoints estan documentados en docs/API.md
-const API_URL = 'http://localhost:8080/api'
+// Para usar otro puerto crear .env.local con VITE_API_URL=http://localhost:8081/api
+const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api'
 const CLAVE_TOKEN = 'amicus.token'
 
 export function guardarToken(token) {
