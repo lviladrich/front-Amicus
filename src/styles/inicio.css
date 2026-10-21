@@ -1,0 +1,96 @@
+/* Pantalla Inicio */
+.inicio-hero {
+  background: var(--blanco);
+  border-bottom: 1px solid var(--borde);
+}
+
+.frase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  line-height: 1.3;
+  color: var(--tinta);
+}
+
+.selector-frase {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.selector-frase select {
+  appearance: none;
+  max-width: 100%;
+  padding: 0 1.6em 0.05em 0;
+  border: none;
+  border-bottom: 4px solid var(--cinta);
+  border-radius: 0;
+  background: transparent;
+  color: var(--pino);
+  font: inherit;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  /* El select mide lo que dice la opcion elegida, no la mas larga: la frase entra en una linea */
+  field-sizing: content;
+}
+.selector-frase select:disabled { cursor: progress; opacity: 0.7; }
+.selector-frase option { font-size: 1rem; color: var(--tinta); }
+
+.selector-flecha {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pino);
+  pointer-events: none;
+}
+
+/* Chips en una sola fila con scroll horizontal en mobile */
+.filtro-categorias {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.25rem 0.25rem 0.5rem;
+}
+.filtro-categorias .chip { flex-shrink: 0; padding: 0.4rem 0.9rem; }
+
+@media (min-width: 768px) {
+  .filtro-categorias { flex-wrap: wrap; overflow-x: visible; }
+}
+
+/* Tarjeta de servicio */
+.tarjeta-servicio {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  color: var(--tinta);
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.tarjeta-servicio:hover {
+  color: var(--tinta);
+  box-shadow: 0 6px 16px rgba(26, 36, 32, 0.1);
+  transform: translateY(-2px);
+}
+
+.tarjeta-servicio-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 130px;
+  color: var(--pino);
+}
+.tarjeta-servicio-imagen img { width: 100%; height: 100%; object-fit: cover; }
+
+.tarjeta-servicio-cuerpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem 1rem;
+}
