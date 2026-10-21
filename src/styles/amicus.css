@@ -1,0 +1,206 @@
+/* Estilos base de Amicus. Paleta y tipografia de la maqueta (docs/Maquetacion.pdf, seccion 4) */
+:root {
+  --pino: #1F4D3F;
+  --pino-oscuro: #173B30;
+  --cinta: #F2C14E;
+  --cinta-suave: #FBEBC3;
+  --hoja: #DCE9E2;
+  --fondo: #F5F8F6;
+  --tinta: #1A2420;
+  --tinta-suave: #4A5752;
+  --alerta: #B3261E;
+  --borde: #E1E8E4;
+  --blanco: #FFFFFF;
+  --radio: 12px;
+  --radio-chico: 8px;
+  --sombra: 0 1px 2px rgba(26, 36, 32, 0.06);
+  --fuente-titulos: 'Bricolage Grotesque', system-ui, sans-serif;
+  --fuente-texto: 'Instrument Sans', system-ui, sans-serif;
+}
+
+body {
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--fuente-texto);
+}
+
+h1, h2, h3, h4, h5, .titulo, .precio {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+a { color: var(--pino); }
+
+/* Foco de teclado visible en amarillo (accesibilidad) */
+:focus-visible {
+  outline: 3px solid var(--cinta) !important;
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+
+.text-secundario { color: var(--tinta-suave); }
+.bg-blanco { background: var(--blanco); }
+
+/* ---------- Header / Footer ---------- */
+.header {
+  background: var(--blanco);
+  border-bottom: 1px solid var(--borde);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--pino);
+  text-decoration: none;
+}
+
+.logo-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--pino);
+  color: var(--blanco);
+}
+
+.logo-claro { color: var(--blanco); }
+.logo-claro .logo-icono { background: var(--blanco); color: var(--pino); }
+
+.nav-enlace {
+  color: var(--tinta);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.nav-enlace:hover { color: var(--pino); }
+
+.contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--cinta);
+  color: var(--tinta);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--hoja);
+  color: var(--pino);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.footer {
+  background: var(--pino);
+  color: var(--blanco);
+  font-size: 0.85rem;
+}
+.footer a, .footer span { color: var(--blanco); text-decoration: none; }
+
+/* ---------- Botones ---------- */
+.btn-amicus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radio-chico);
+  border: 1px solid var(--pino);
+  background: var(--pino);
+  color: var(--blanco);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-amicus:hover { background: var(--pino-oscuro); color: var(--blanco); }
+.btn-amicus:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-amicus-borde { background: var(--blanco); color: var(--pino); }
+.btn-amicus-borde:hover { background: var(--hoja); color: var(--pino); }
+
+.btn-texto {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--pino);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- Tarjetas, chips y etiquetas ---------- */
+.tarjeta {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--hoja);
+  color: var(--pino);
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.chip-activo { background: var(--pino); color: var(--blanco); }
+
+.etiqueta {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--hoja);
+  color: var(--pino);
+  font-size: 0.75rem;
+}
+
+.etiqueta-cupos {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--cinta-suave);
+  color: var(--tinta);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ---------- Mensajes ---------- */
+.alerta-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radio-chico);
+  border: 1px solid var(--alerta);
+  background: #FCEDEC;
+  color: var(--alerta);
+}
+
+.texto-error {
+  color: var(--alerta);
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
