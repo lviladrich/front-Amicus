@@ -10,7 +10,10 @@ function Inicio() {
   const [intento, setIntento] = useState(0)
   // Guarda a que intento corresponde la respuesta: si no coincide, todavia esta cargando
   const [catalogo, setCatalogo] = useState(null)
-  // Filtros compartidos por los selectores, los chips y la lista: todo se aplica al instante
+  // Lo que el usuario va eligiendo en la frase; se aplica a la lista recien al apretar Buscar
+  const [categoriaFrase, setCategoriaFrase] = useState('')
+  const [zonaFrase, setZonaFrase] = useState('')
+  // Filtros aplicados a la lista
   const [categoriaId, setCategoriaId] = useState('')
   const [zonaId, setZonaId] = useState('')
 
@@ -33,9 +36,16 @@ function Inicio() {
   const zonas = (!cargando && catalogo.zonas) || []
   const error = !cargando ? catalogo.error : null
 
-  // La lista ya se filtra al elegir; Buscar solo lleva la vista hasta los resultados
-  function irAResultados() {
+  function buscar() {
+    setCategoriaId(categoriaFrase)
+    setZonaId(zonaFrase)
     document.getElementById('titulo-servicios')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  // Los chips filtran al instante y dejan la frase en la misma categoria
+  function elegirCategoria(id) {
+    setCategoriaId(id)
+    setCategoriaFrase(id)
   }
 
   return (
@@ -46,11 +56,11 @@ function Inicio() {
           <BuscadorFrase
             categorias={categorias}
             zonas={zonas}
-            categoriaId={categoriaId}
-            onCategoria={setCategoriaId}
-            zonaId={zonaId}
-            onZona={setZonaId}
-            onBuscar={irAResultados}
+            categoriaId={categoriaFrase}
+            onCategoria={setCategoriaFrase}
+            zonaId={zonaFrase}
+            onZona={setZonaFrase}
+            onBuscar={buscar}
             cargando={cargando}
           />
           <div className="mt-3">
@@ -60,7 +70,7 @@ function Inicio() {
       </section>
 
       <section className="container py-4">
-        <FiltroCategorias categorias={categorias} categoriaId={categoriaId} onElegir={setCategoriaId} />
+        <FiltroCategorias categorias={categorias} categoriaId={categoriaId} onElegir={elegirCategoria} />
         <ListaServicios categoriaId={categoriaId} zonaId={zonaId} />
       </section>
     </>
