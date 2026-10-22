@@ -45,6 +45,28 @@ export function validarPerfil({ nombre, apellido, email }) {
   return errores
 }
 
+// Espeja ServicioRequest/ActualizarServicioRequest del back
+export function validarServicio({ titulo, descripcion, precio, cuposDisponibles, categoriaId }) {
+  const errores = {}
+  if (!titulo.trim()) errores.titulo = 'Ingresá un título.'
+  else if (titulo.trim().length > 120) errores.titulo = 'El título no puede superar los 120 caracteres.'
+  if (!descripcion.trim()) errores.descripcion = 'Ingresá una descripción.'
+  else if (descripcion.trim().length > 1000) errores.descripcion = 'La descripción no puede superar los 1000 caracteres.'
+  if (!precio || Number(precio) <= 0) errores.precio = 'El precio debe ser mayor a cero.'
+  if (cuposDisponibles === '' || Number(cuposDisponibles) < 0) {
+    errores.cuposDisponibles = 'Los cupos no pueden ser negativos.'
+  }
+  if (!categoriaId) errores.categoriaId = 'Elegí una categoría.'
+  return errores
+}
+
+export function validarImagen({ url }) {
+  const errores = {}
+  if (!url.trim()) errores.url = 'Ingresá la url de la imagen.'
+  else if (url.trim().length > 500) errores.url = 'La url no puede superar los 500 caracteres.'
+  return errores
+}
+
 export function validarResena({ puntaje, comentario }) {
   const errores = {}
   if (!puntaje) errores.puntaje = 'Elegí un puntaje de 1 a 5.'

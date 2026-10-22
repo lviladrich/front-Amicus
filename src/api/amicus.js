@@ -75,6 +75,37 @@ export function obtenerServicio(id) {
   return pedir(`/servicios/${id}`)
 }
 
+// ---------- Mis servicios (requiere sesion) ----------
+export function listarMisServicios(profesionalId) {
+  return pedir(`/servicios/profesional/${profesionalId}`)
+}
+
+// datos: { titulo, descripcion, precio, cuposDisponibles, categoriaId, zonaIds }
+export function publicarServicio(datos) {
+  return pedir('/servicios', { metodo: 'POST', cuerpo: { ...datos, imagenes: [] } })
+}
+
+export function actualizarServicio(id, datos) {
+  return pedir(`/servicios/${id}`, { metodo: 'PUT', cuerpo: datos })
+}
+
+export function actualizarCupos(id, cuposDisponibles) {
+  return pedir(`/servicios/${id}/cupos`, { metodo: 'PATCH', cuerpo: { cuposDisponibles } })
+}
+
+export function darDeBajaServicio(id) {
+  return pedir(`/servicios/${id}`, { metodo: 'DELETE' })
+}
+
+// datos: { url, ordenVisualizacion }
+export function agregarImagenServicio(servicioId, datos) {
+  return pedir(`/servicios/${servicioId}/imagenes`, { metodo: 'POST', cuerpo: datos })
+}
+
+export function quitarImagenServicio(servicioId, imagenId) {
+  return pedir(`/servicios/${servicioId}/imagenes/${imagenId}`, { metodo: 'DELETE' })
+}
+
 export function listarResenas(servicioId, pagina = 0) {
   return pedir(`/servicios/${servicioId}/resenas?page=${pagina}`)
 }
