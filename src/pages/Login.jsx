@@ -6,7 +6,6 @@ function Login() {
     <PanelAcceso
       titular="Profesionales de tu barrio,"
       destacado="a un clic."
-      pie="Plomería, electricidad, pintura y más, en 18 barrios de CABA y el conurbano."
     >
       <FormularioLogin />
     </PanelAcceso>

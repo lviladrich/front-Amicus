@@ -107,6 +107,63 @@ a { color: var(--pino); }
   font-size: 0.85rem;
 }
 
+/* Menu de usuario: pildora con avatar que abre un panel */
+.menu-usuario { position: relative; }
+
+.menu-usuario-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 10px 3px 3px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--tinta);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: border-color 0.15s, background 0.15s;
+}
+.menu-usuario-boton:hover,
+.menu-usuario-boton[aria-expanded='true'] { border-color: var(--pino); background: var(--fondo); }
+.menu-usuario-boton .avatar { width: 30px; height: 30px; font-size: 0.75rem; background: var(--pino); color: var(--blanco); }
+.menu-usuario-flecha { color: var(--tinta-suave); transition: transform 0.15s; }
+.menu-usuario-boton[aria-expanded='true'] .menu-usuario-flecha { transform: rotate(180deg); }
+
+.menu-usuario-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  min-width: 220px;
+  padding: 6px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: 0 8px 24px rgba(26, 36, 32, 0.12);
+}
+.menu-usuario-datos {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.9rem;
+}
+.menu-usuario-opcion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: var(--radio-chico);
+  background: transparent;
+  color: var(--tinta);
+  font-size: 0.9rem;
+  text-align: left;
+}
+.menu-usuario-opcion:hover { background: var(--fondo); color: var(--alerta); }
+
 .footer {
   background: var(--pino);
   color: var(--blanco);

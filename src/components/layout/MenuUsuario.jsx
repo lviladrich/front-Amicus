@@ -1,22 +1,65 @@
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ChevronDown, LogOut } from 'lucide-react'
 import useSesion from '../../hooks/useSesion.js'
 import { iniciales } from '../../utils/formato.js'
 
-// TODO (ver docs/PENDIENTES.md): convertir en menu desplegable con "Mi perfil" y "Mis ordenes"
+// TODO (ver docs/PENDIENTES.md): sumar "Mi perfil" y "Mis ordenes" al menu cuando existan esas pantallas
 function MenuUsuario() {
   const { usuario, cerrarSesion } = useSesion()
   const navigate = useNavigate()
+  const [abierto, setAbierto] = useState(false)
+  const contenedor = useRef(null)
+
+  // Cierra el menu al hacer clic afuera o con Escape
+  useEffect(() => {
+    if (!abierto) return
+    function alHacerClic(evento) {
+      if (contenedor.current && !contenedor.current.contains(evento.target)) setAbierto(false)
+    }
+    function alApretarTecla(evento) {
+      if (evento.key === 'Escape') setAbierto(false)
+    }
+    document.addEventListener('mousedown', alHacerClic)
+    document.addEventListener('keydown', alApretarTecla)
+    return () => {
+      document.removeEventListener('mousedown', alHacerClic)
+      document.removeEventListener('keydown', alApretarTecla)
+    }
+  }, [abierto])
 
   function salir() {
+    setAbierto(false)
     cerrarSesion()
     navigate('/')
   }
 
   return (
-    <div className="d-flex align-items-center gap-2">
-      <span className="avatar" aria-hidden="true">{iniciales(usuario)}</span>
-      <span className="d-none d-md-inline fw-semibold">{usuario.nombre}</span>
-      <button type="button" className="btn-texto" onClick={salir}>Salir</button>
+    <div className="menu-usuario" ref={contenedor}>
+      <button
+        type="button"
+        className="menu-usuario-boton"
+        aria-haspopup="menu"
+        aria-expanded={abierto}
+        onClick={() => setAbierto(!abierto)}
+      >
+        <span className="avatar" aria-hidden="true">{iniciales(usuario)}</span>
+        <span className="d-none d-md-inline">{usuario.nombre}</span>
+        <ChevronDown size={16} aria-hidden="true" className="menu-usuario-flecha" />
+      </button>
+
+      {abierto && (
+        <div className="menu-usuario-panel" role="menu">
+          <div className="menu-usuario-datos">
+            <span className="fw-semibold">{usuario.nombre} {usuario.apellido}</span>
+            <span className="text-secundario small">{usuario.email}</span>
+          </div>
+          <button type="button" role="menuitem" className="menu-usuario-opcion" onClick={salir}>
+            <LogOut size={16} aria-hidden="true" />
+            Cerrar sesión
+          </button>
+        </div>
+      )}
     </div>
   )
 }
