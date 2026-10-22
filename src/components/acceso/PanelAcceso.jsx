@@ -8,7 +8,7 @@ function PanelAcceso({ titular, destacado, pie, children }) {
         <h2 className="acceso-titular">
           {titular} <span className="acceso-destacado">{destacado}</span>
         </h2>
-        <p className="acceso-pie">{pie}</p>
+        {pie && <p className="acceso-pie">{pie}</p>}
       </aside>
       <section className="acceso-contenido">
         <div className="acceso-tarjeta">{children}</div>
