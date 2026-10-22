@@ -79,6 +79,15 @@ export function listarResenas(servicioId, pagina = 0) {
   return pedir(`/servicios/${servicioId}/resenas?page=${pagina}`)
 }
 
+// datos: { puntaje, comentario }
+export function crearResena(servicioId, datos) {
+  return pedir(`/servicios/${servicioId}/resenas`, { metodo: 'POST', cuerpo: datos })
+}
+
+export function eliminarResena(id) {
+  return pedir(`/resenas/${id}`, { metodo: 'DELETE' })
+}
+
 // ---------- Categorias y zonas ----------
 export function listarCategorias() {
   return pedir('/categorias')

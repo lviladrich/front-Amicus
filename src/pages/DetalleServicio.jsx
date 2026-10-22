@@ -9,6 +9,7 @@ import TarjetaProfesional from '../components/detalle/TarjetaProfesional.jsx'
 import ListaZonas from '../components/detalle/ListaZonas.jsx'
 import ListaResenas from '../components/detalle/ListaResenas.jsx'
 import PanelCompra from '../components/detalle/PanelCompra.jsx'
+import '../styles/acceso.css'
 import '../styles/detalle.css'
 
 function DetalleServicio() {
@@ -47,6 +48,10 @@ function DetalleServicio() {
     contenido = <MensajeError onReintentar={() => setIntento(intento + 1)}>{respuesta.error.message}</MensajeError>
   } else {
     const { servicio } = respuesta
+    // Permite que ListaResenas actualice el promedio y la cantidad sin recargar toda la pantalla
+    const actualizarResumenResenas = (cambios) => {
+      setRespuesta((actual) => ({ ...actual, servicio: { ...actual.servicio, ...cambios } }))
+    }
     contenido = (
       <>
         <Migas categoria={servicio.categoria.nombre} titulo={servicio.titulo} />
@@ -69,6 +74,7 @@ function DetalleServicio() {
                 servicioId={servicio.id}
                 promedio={servicio.promedioPuntaje}
                 cantidad={servicio.cantidadResenas}
+                onResumenActualizado={actualizarResumenResenas}
               />
             </div>
           </div>

@@ -35,6 +35,21 @@
 /* Amarillo mas oscuro que la cinta para que las estrellas contrasten sobre blanco */
 .estrellas { display: inline-flex; gap: 2px; color: #A8730A; }
 
+.resena-borrar { color: var(--tinta-suave); }
+.resena-borrar:hover { color: var(--alerta); }
+
+.formulario-resena { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.selector-puntaje { display: inline-flex; gap: 2px; color: #A8730A; }
+.selector-puntaje-boton {
+  padding: 2px;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.selector-puntaje-boton:disabled { opacity: 0.5; cursor: not-allowed; }
+
 .panel-compra { position: static; }
 @media (min-width: 992px) {
   .panel-compra { position: sticky; top: 1.5rem; }

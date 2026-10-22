@@ -44,3 +44,12 @@ export function validarPerfil({ nombre, apellido, email }) {
   if (errorEmail) errores.email = errorEmail
   return errores
 }
+
+export function validarResena({ puntaje, comentario }) {
+  const errores = {}
+  if (!puntaje) errores.puntaje = 'Elegí un puntaje de 1 a 5.'
+  if (comentario && comentario.length > 1000) {
+    errores.comentario = 'El comentario no puede superar los 1000 caracteres.'
+  }
+  return errores
+}
