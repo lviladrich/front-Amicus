@@ -21,6 +21,16 @@ export class ErrorApi extends Error {
   }
 }
 
+// Arma el query string salteando valores vacios, para no mandar page= o q= de mas
+function aConsulta(filtros) {
+  const params = new URLSearchParams()
+  Object.entries(filtros).forEach(([clave, valor]) => {
+    if (valor !== undefined && valor !== null && valor !== '') params.append(clave, valor)
+  })
+  const consulta = params.toString()
+  return consulta ? `?${consulta}` : ''
+}
+
 async function pedir(ruta, { metodo = 'GET', cuerpo } = {}) {
   const headers = {}
   const token = leerToken()
@@ -58,12 +68,7 @@ export async function listarServicios(filtros = {}) {
 }
 
 export function buscarServicios(filtros = {}) {
-  const params = new URLSearchParams()
-  Object.entries(filtros).forEach(([clave, valor]) => {
-    if (valor !== undefined && valor !== null && valor !== '') params.append(clave, valor)
-  })
-  const consulta = params.toString()
-  return pedir(`/servicios${consulta ? `?${consulta}` : ''}`)
+  return pedir(`/servicios${aConsulta(filtros)}`)
 }
 
 export function obtenerServicio(id) {
@@ -93,6 +98,15 @@ export function registrar(datos) {
   return pedir('/auth/registro', { metodo: 'POST', cuerpo: datos })
 }
 
+export function obtenerUsuario(id) {
+  return pedir(`/auth/usuarios/${id}`)
+}
+
+// datos: { nombre, apellido, email }
+export function actualizarPerfil(id, datos) {
+  return pedir(`/auth/usuarios/${id}`, { metodo: 'PUT', cuerpo: datos })
+}
+
 // ---------- Carrito (requiere sesion) ----------
 export function verCarrito() {
   return pedir('/carrito')
@@ -115,6 +129,15 @@ export function confirmarCompra() {
 }
 
 // ---------- Ordenes (requiere sesion) ----------
+// filtros: { page, size }
+export function listarOrdenes(filtros = {}) {
+  return pedir(`/ordenes${aConsulta(filtros)}`)
+}
+
 export function obtenerOrden(id) {
   return pedir(`/ordenes/${id}`)
+}
+
+export function cancelarOrden(id) {
+  return pedir(`/ordenes/${id}/cancelar`, { metodo: 'PATCH' })
 }

@@ -161,6 +161,7 @@ a { color: var(--pino); }
   color: var(--tinta);
   font-size: 0.9rem;
   text-align: left;
+  text-decoration: none;
 }
 .menu-usuario-opcion:hover { background: var(--fondo); color: var(--alerta); }
 
@@ -193,6 +194,9 @@ a { color: var(--pino); }
 .btn-amicus-borde { background: var(--blanco); color: var(--pino); }
 .btn-amicus-borde:hover { background: var(--hoja); color: var(--pino); }
 
+.btn-amicus-peligro { border-color: var(--alerta); background: var(--alerta); }
+.btn-amicus-peligro:hover { background: #8c1d17; border-color: #8c1d17; }
+
 .btn-texto {
   background: none;
   border: none;
@@ -202,6 +206,7 @@ a { color: var(--pino); }
   text-decoration: underline;
   cursor: pointer;
 }
+.btn-texto:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* ---------- Tarjetas, chips y etiquetas ---------- */
 .tarjeta {
@@ -261,3 +266,44 @@ a { color: var(--pino); }
   font-size: 0.85rem;
   margin-top: 4px;
 }
+
+/* ---------- Modal de confirmacion ---------- */
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(26, 36, 32, 0.5);
+}
+
+.modal-caja {
+  width: 100%;
+  max-width: 24rem;
+  padding: 1.5rem;
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: 0 16px 40px rgba(26, 36, 32, 0.25);
+}
+
+.modal-titulo { margin: 0 0 0.5rem; font-size: 1.15rem; }
+.modal-cuerpo { color: var(--tinta-suave); font-size: 0.9rem; }
+
+.modal-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* ---------- Paginacion ---------- */
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.paginacion .btn-texto { display: inline-flex; align-items: center; gap: 4px; }

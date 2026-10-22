@@ -28,7 +28,16 @@ function SesionProvider({ children }) {
     setUsuario(null)
   }, [])
 
-  const valor = useMemo(() => ({ usuario, iniciarSesion, cerrarSesion }), [usuario, iniciarSesion, cerrarSesion])
+  // Recibe el UsuarioResponse ya actualizado que devuelve PUT /auth/usuarios/{id}
+  const actualizarUsuario = useCallback((datosUsuario) => {
+    localStorage.setItem(CLAVE_USUARIO, JSON.stringify(datosUsuario))
+    setUsuario(datosUsuario)
+  }, [])
+
+  const valor = useMemo(
+    () => ({ usuario, iniciarSesion, cerrarSesion, actualizarUsuario }),
+    [usuario, iniciarSesion, cerrarSesion, actualizarUsuario],
+  )
 
   return (
     <SesionContext.Provider value={valor}>

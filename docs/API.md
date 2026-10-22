@@ -23,14 +23,19 @@ Los errores vienen como `{ estado, error, mensaje, ruta, errores: { campo: mensa
 | Carrito 🔒 | `PUT /carrito/items/{itemId}` `{ cantidad, frecuencia }` | carrito |
 | Carrito 🔒 | `DELETE /carrito/items/{itemId}` | carrito |
 | Carrito 🔒 | `POST /carrito/checkout` | orden |
-| Confirmación 🔒 | `GET /ordenes/{id}` | `{ id, usuarioId, fecha, estado (CONFIRMADA/CANCELADA), total, items[{ id, servicioId, titulo, cantidad, frecuencia, precioUnitario, subtotal }] }` |
+| Confirmación 🔒, Detalle de orden 🔒 | `GET /ordenes/{id}` | `{ id, usuarioId, fecha, estado (CONFIRMADA/CANCELADA), total, items[{ id, servicioId, titulo, cantidad, frecuencia, precioUnitario, subtotal }] }` |
+| Confirmación 🔒, Detalle de orden 🔒 | `PATCH /ordenes/{id}/cancelar` | orden, con `estado: CANCELADA` |
+| Mi perfil 🔒 | `GET /auth/usuarios/{id}` | `{ id, username, email, nombre, apellido, rol }` |
+| Mi perfil 🔒 | `PUT /auth/usuarios/{id}` `{ nombre, apellido, email }` | usuario actualizado |
+| Mis órdenes 🔒 | `GET /ordenes?page&size` | Página de `{ id, usuarioId, fecha, estado, total, items[...] }` |
+| Carrito 🔒 | `DELETE /carrito` | carrito vacío |
+| Detalle 🔒 | `POST /servicios/{id}/resenas` `{ puntaje (1-5), comentario? }` | `{ id, puntaje, comentario, fecha, autorId, autor }` |
+| Detalle 🔒 | `DELETE /resenas/{id}` | — (204, solo el autor puede borrar la suya) |
 
 `frecuencia` es uno de `UNICA`, `SEMANAL`, `QUINCENAL`, `MENSUAL` (ver `FRECUENCIAS` en `src/utils/formato.js`).
 
 ## Todavía sin pantalla
 
-Ver `docs/PENDIENTES.md`: perfil (`GET/PUT /auth/usuarios/{id}`), mis órdenes y cancelar (`GET /ordenes`,
-`PATCH /ordenes/{id}/cancelar`), vaciar carrito (`DELETE /carrito`), reseñas (`POST /servicios/{id}/resenas`,
-`DELETE /resenas/{id}`), panel del profesional (`GET /servicios/profesional/{id}`, `POST/PUT/DELETE /servicios`,
+Ver `docs/PENDIENTES.md`: panel del profesional (`GET /servicios/profesional/{id}`, `POST/PUT/DELETE /servicios`,
 `PATCH /servicios/{id}/cupos`, `POST/DELETE /servicios/{id}/imagenes`) y admin de categorías y zonas
 (`POST/PUT/DELETE /categorias` y `/zonas`, solo ADMIN).

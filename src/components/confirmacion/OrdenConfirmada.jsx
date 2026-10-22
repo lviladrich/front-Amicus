@@ -45,7 +45,7 @@ function OrdenConfirmada({ id }) {
   return (
     <>
       <SelloConfirmacion orden={orden} />
-      <DetalleOrden orden={orden} />
+      <DetalleOrden orden={orden} onOrdenActualizada={setOrden} />
       <Link to="/" className="btn-amicus confirmacion-boton">Seguir buscando servicios</Link>
     </>
   )
