@@ -77,6 +77,41 @@
 .selector-lista button:hover { background: var(--fondo); }
 .selector-lista button[aria-selected='true'] { background: var(--hoja); color: var(--pino); font-weight: 600; }
 
+/* Buscador por palabra clave, debajo de la frase principal */
+.frase-texto-libre {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 28rem;
+  margin-top: 1.25rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  color: var(--tinta-suave);
+}
+.frase-texto-libre input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--tinta);
+}
+.frase-texto-libre input:focus { outline: none; }
+.frase-texto-libre input::placeholder { color: var(--tinta-suave); }
+
+/* Switch "Solo con cupo" */
+.switch-cupo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+  cursor: pointer;
+}
+.switch-cupo input { accent-color: var(--pino); width: 1rem; height: 1rem; }
+
 /* Chips en una sola fila con scroll horizontal en mobile */
 .filtro-categorias {
   display: flex;

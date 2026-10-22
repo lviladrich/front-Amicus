@@ -26,9 +26,8 @@ function Carrito() {
       })
       .catch((fallo) => {
         if (!activo) return
-        // Token vencido: cerramos la sesion y RutaPrivada manda al login
-        // TODO (ver docs/PENDIENTES.md): avisar que la sesion vencio en vez de cerrarla en silencio
-        if (fallo.estado === 401) cerrarSesion()
+        // Token vencido: cerramos la sesion con un aviso y RutaPrivada manda al login
+        if (fallo.estado === 401) cerrarSesion('Tu sesión venció. Iniciá sesión de nuevo para continuar.')
         else setError(fallo.message)
       })
       .finally(() => {

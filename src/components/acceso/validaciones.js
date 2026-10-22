@@ -34,3 +34,22 @@ export function validarRegistro({ nombre, apellido, username, email, password })
   if (errorPassword) errores.password = errorPassword
   return errores
 }
+
+// PUT /auth/usuarios/{id} no incluye username ni password, asi que no se validan aca
+export function validarPerfil({ nombre, apellido, email }) {
+  const errores = {}
+  if (!nombre.trim()) errores.nombre = 'Ingresá tu nombre.'
+  if (!apellido.trim()) errores.apellido = 'Ingresá tu apellido.'
+  const errorEmail = validarEmail(email)
+  if (errorEmail) errores.email = errorEmail
+  return errores
+}
+
+export function validarResena({ puntaje, comentario }) {
+  const errores = {}
+  if (!puntaje) errores.puntaje = 'Elegí un puntaje de 1 a 5.'
+  if (comentario && comentario.length > 1000) {
+    errores.comentario = 'El comentario no puede superar los 1000 caracteres.'
+  }
+  return errores
+}

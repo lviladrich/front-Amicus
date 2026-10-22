@@ -1,9 +1,9 @@
+import { Search } from 'lucide-react'
 import SelectorServicio from './SelectorServicio.jsx'
 import SelectorBarrio from './SelectorBarrio.jsx'
 import BotonBuscar from './BotonBuscar.jsx'
 
-// TODO (ver docs/PENDIENTES.md): busqueda por texto libre (parametro q)
-function BuscadorFrase({ categorias, zonas, categoriaId, onCategoria, zonaId, onZona, onBuscar, cargando }) {
+function BuscadorFrase({ categorias, zonas, categoriaId, onCategoria, zonaId, onZona, texto, onTexto, onBuscar, cargando }) {
   function manejarEnvio(evento) {
     evento.preventDefault()
     onBuscar()
@@ -22,6 +22,18 @@ function BuscadorFrase({ categorias, zonas, categoriaId, onCategoria, zonaId, on
         <p className="text-secundario small mb-0">
           Elegí qué necesitás y en qué barrio: te mostramos quién lo hace cerca tuyo.
         </p>
+      </div>
+      <div className="frase-texto-libre">
+        <Search size={18} aria-hidden="true" />
+        <label htmlFor="busqueda-texto" className="visually-hidden">Buscar por palabra clave</label>
+        <input
+          id="busqueda-texto"
+          type="search"
+          placeholder="O buscá por palabra clave, por ejemplo “destapación”"
+          value={texto}
+          onChange={(evento) => onTexto(evento.target.value)}
+          disabled={cargando}
+        />
       </div>
     </form>
   )

@@ -10,6 +10,9 @@ import Login from './pages/Login.jsx'
 import Registro from './pages/Registro.jsx'
 import Carrito from './pages/Carrito.jsx'
 import Confirmacion from './pages/Confirmacion.jsx'
+import Perfil from './pages/Perfil.jsx'
+import MisOrdenes from './pages/MisOrdenes.jsx'
+import DetalleOrdenPage from './pages/DetalleOrdenPage.jsx'
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
                 <Route path="/registro" element={<Registro />} />
                 <Route path="/carrito" element={<RutaPrivada><Carrito /></RutaPrivada>} />
                 <Route path="/ordenes/:id/confirmacion" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
+                <Route path="/perfil" element={<RutaPrivada><Perfil /></RutaPrivada>} />
+                <Route path="/ordenes" element={<RutaPrivada><MisOrdenes /></RutaPrivada>} />
+                <Route path="/ordenes/:id" element={<RutaPrivada><DetalleOrdenPage /></RutaPrivada>} />
               </Routes>
             </main>
             <Footer />

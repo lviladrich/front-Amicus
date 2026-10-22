@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ChevronDown, LogOut } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ChevronDown, LogOut, Receipt, User } from 'lucide-react'
 import useSesion from '../../hooks/useSesion.js'
 import { iniciales } from '../../utils/formato.js'
 
-// TODO (ver docs/PENDIENTES.md): sumar "Mi perfil" y "Mis ordenes" al menu cuando existan esas pantallas
 function MenuUsuario() {
   const { usuario, cerrarSesion } = useSesion()
   const navigate = useNavigate()
@@ -54,6 +53,14 @@ function MenuUsuario() {
             <span className="fw-semibold">{usuario.nombre} {usuario.apellido}</span>
             <span className="text-secundario small">{usuario.email}</span>
           </div>
+          <Link to="/perfil" role="menuitem" className="menu-usuario-opcion" onClick={() => setAbierto(false)}>
+            <User size={16} aria-hidden="true" />
+            Mi perfil
+          </Link>
+          <Link to="/ordenes" role="menuitem" className="menu-usuario-opcion" onClick={() => setAbierto(false)}>
+            <Receipt size={16} aria-hidden="true" />
+            Mis órdenes
+          </Link>
           <button type="button" role="menuitem" className="menu-usuario-opcion" onClick={salir}>
             <LogOut size={16} aria-hidden="true" />
             Cerrar sesión

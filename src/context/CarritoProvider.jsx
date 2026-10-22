@@ -16,7 +16,7 @@ function CarritoProvider({ children }) {
       })
       .catch((error) => {
         // Token vencido o invalido: cerramos la sesion para que vuelva a ingresar
-        if (error.estado === 401) cerrarSesion()
+        if (error.estado === 401) cerrarSesion('Tu sesión venció. Iniciá sesión de nuevo para continuar.')
         setCarrito(null)
         return null
       })
@@ -31,7 +31,9 @@ function CarritoProvider({ children }) {
         if (vigente) setCarrito(datos)
       })
       .catch((error) => {
-        if (vigente && error.estado === 401) cerrarSesion()
+        if (vigente && error.estado === 401) {
+          cerrarSesion('Tu sesión venció. Iniciá sesión de nuevo para continuar.')
+        }
       })
     return () => {
       vigente = false

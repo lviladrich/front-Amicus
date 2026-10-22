@@ -56,6 +56,14 @@
 }
 .detalle-orden-total .precio { font-size: 1.5rem; }
 
+.detalle-orden-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
+.detalle-orden-cancelar { color: var(--alerta); }
+
 .confirmacion-boton { margin-top: 1.5rem; }
 
 @media (max-width: 575.98px) {

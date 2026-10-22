@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { login } from '../../api/amicus.js'
 import useSesion from '../../hooks/useSesion.js'
@@ -11,9 +11,14 @@ function FormularioLogin() {
   const [errores, setErrores] = useState({})
   const [errorGeneral, setErrorGeneral] = useState('')
   const [enviando, setEnviando] = useState(false)
-  const { iniciarSesion } = useSesion()
+  const { iniciarSesion, avisoSesion, limpiarAvisoSesion } = useSesion()
   const navigate = useNavigate()
   const location = useLocation()
+
+  // El aviso solo tiene que verse una vez: se limpia apenas se muestra esta pantalla
+  useEffect(() => {
+    return () => limpiarAvisoSesion()
+  }, [limpiarAvisoSesion])
 
   function cambiar(evento) {
     const { name, value } = evento.target
@@ -45,7 +50,7 @@ function FormularioLogin() {
       <h1 className="acceso-titulo">Ingresar</h1>
       <p className="text-secundario">Entrá a tu cuenta para contratar servicios y ver tus órdenes.</p>
       <form onSubmit={enviar} noValidate className="acceso-formulario">
-        <MensajeError>{errorGeneral}</MensajeError>
+        <MensajeError>{avisoSesion || errorGeneral}</MensajeError>
         <Campo
           id="email"
           etiqueta="Email"

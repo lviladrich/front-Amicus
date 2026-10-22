@@ -1,0 +1,26 @@
+/* Pantalla Mis ordenes */
+.ordenes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.orden-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  padding: 1rem 1.25rem;
+}
+
+.orden-item-datos { flex: 1 1 10rem; }
+.orden-item-total { margin-left: auto; }
+
+.etiqueta-cancelada { background: #FCEDEC; color: var(--alerta); }
+
+@media (max-width: 575.98px) {
+  .orden-item-total { margin-left: 0; order: 1; }
+}

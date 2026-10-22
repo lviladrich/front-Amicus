@@ -13,9 +13,11 @@ function Inicio() {
   // Lo que el usuario va eligiendo en la frase; se aplica a la lista recien al apretar Buscar
   const [categoriaFrase, setCategoriaFrase] = useState('')
   const [zonaFrase, setZonaFrase] = useState('')
+  const [textoFrase, setTextoFrase] = useState('')
   // Filtros aplicados a la lista
   const [categoriaId, setCategoriaId] = useState('')
   const [zonaId, setZonaId] = useState('')
+  const [texto, setTexto] = useState('')
 
   useEffect(() => {
     let vigente = true
@@ -39,6 +41,7 @@ function Inicio() {
   function buscar() {
     setCategoriaId(categoriaFrase)
     setZonaId(zonaFrase)
+    setTexto(textoFrase)
     document.getElementById('titulo-servicios')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -60,6 +63,8 @@ function Inicio() {
             onCategoria={setCategoriaFrase}
             zonaId={zonaFrase}
             onZona={setZonaFrase}
+            texto={textoFrase}
+            onTexto={setTextoFrase}
             onBuscar={buscar}
             cargando={cargando}
           />
@@ -71,7 +76,7 @@ function Inicio() {
 
       <section className="container py-4">
         <FiltroCategorias categorias={categorias} categoriaId={categoriaId} onElegir={elegirCategoria} />
-        <ListaServicios categoriaId={categoriaId} zonaId={zonaId} />
+        <ListaServicios categoriaId={categoriaId} zonaId={zonaId} texto={texto} />
       </section>
     </>
   )
