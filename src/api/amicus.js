@@ -128,6 +128,10 @@ export function confirmarCompra() {
   return pedir('/carrito/checkout', { metodo: 'POST' })
 }
 
+export function vaciarCarrito() {
+  return pedir('/carrito', { metodo: 'DELETE' })
+}
+
 // ---------- Ordenes (requiere sesion) ----------
 // filtros: { page, size }
 export function listarOrdenes(filtros = {}) {

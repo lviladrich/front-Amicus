@@ -7,6 +7,12 @@
   align-items: start;
 }
 
+.carrito-lista-cabecera {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
 .carrito-lista {
   display: flex;
   flex-direction: column;
