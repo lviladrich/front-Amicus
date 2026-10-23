@@ -157,3 +157,27 @@
   gap: 0.5rem;
   padding: 0.9rem 1rem 1rem;
 }
+
+/* Profesional y zonas, debajo del titulo (como en la maqueta) */
+.tarjeta-servicio-profesional {
+  margin: -0.2rem 0 0;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tarjeta-servicio-dato {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--tinta-suave);
+  font-size: 0.8rem;
+}
+.tarjeta-servicio-dato svg { flex-shrink: 0; }
+.tarjeta-servicio-dato span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tarjeta-servicio-profesional + .tarjeta-servicio-dato { margin-top: -0.3rem; }

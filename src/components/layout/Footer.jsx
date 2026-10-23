@@ -6,11 +6,10 @@ function Footer() {
     <footer className="footer">
       <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 py-4">
         <Logo claro />
-        {/* TODO (ver docs/PENDIENTES.md): paginas de Ayuda y Terminos */}
         <nav className="d-flex gap-3" aria-label="Pie de pagina">
           <Link to="/">Servicios</Link>
-          <span>Ayuda</span>
-          <span>Términos</span>
+          <Link to="/ayuda">Ayuda</Link>
+          <Link to="/terminos">Términos</Link>
         </nav>
         <small>© 2026 Amicus. Servicios para el hogar.</small>
       </div>

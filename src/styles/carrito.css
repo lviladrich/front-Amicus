@@ -42,6 +42,7 @@
 }
 
 .carrito-item-titulo { margin: 0; font-size: 1.05rem; }
+.carrito-item-meta { margin: 0.1rem 0 0; font-size: 0.85rem; }
 .carrito-item-unitario { margin: 0.1rem 0 0.6rem; font-size: 0.85rem; }
 
 .carrito-item-controles {

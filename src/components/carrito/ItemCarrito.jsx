@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Wrench, TriangleAlert } from 'lucide-react'
+import { TriangleAlert } from 'lucide-react'
 import { actualizarItemCarrito, quitarItemCarrito } from '../../api/amicus.js'
 import { formatearPrecio } from '../../utils/formato.js'
+import { estiloCategoria } from '../../utils/categorias.js'
 import SelectorFrecuencia from './SelectorFrecuencia.jsx'
 import StepperCantidad from './StepperCantidad.jsx'
 import MensajeError from '../comunes/MensajeError.jsx'
@@ -10,6 +11,7 @@ import MensajeError from '../comunes/MensajeError.jsx'
 function ItemCarrito({ item, onActualizado }) {
   const [enviando, setEnviando] = useState(false)
   const [error, setError] = useState('')
+  const { fondo, Icono } = estiloCategoria(item.categoria)
 
   function ejecutar(accion) {
     setEnviando(true)
@@ -31,9 +33,14 @@ function ItemCarrito({ item, onActualizado }) {
 
   return (
     <li className="tarjeta carrito-item" aria-busy={enviando}>
-      <div className="carrito-item-icono" aria-hidden="true"><Wrench size={28} /></div>
+      <div className="carrito-item-icono" style={{ background: fondo }} aria-hidden="true"><Icono size={28} /></div>
       <div className="carrito-item-cuerpo">
         <h3 className="carrito-item-titulo">{item.titulo}</h3>
+        {(item.profesional || item.categoria) && (
+          <p className="carrito-item-meta text-secundario">
+            {[item.profesional, item.categoria].filter(Boolean).join(', ')}
+          </p>
+        )}
         <p className="carrito-item-unitario text-secundario">{formatearPrecio(item.precioUnitario)} por servicio</p>
         <div className="carrito-item-controles">
           <StepperCantidad
