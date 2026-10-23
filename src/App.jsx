@@ -15,6 +15,9 @@ import MisOrdenes from './pages/MisOrdenes.jsx'
 import DetalleOrdenPage from './pages/DetalleOrdenPage.jsx'
 import MisServicios from './pages/MisServicios.jsx'
 import FormularioServicioPage from './pages/FormularioServicioPage.jsx'
+import Ayuda from './pages/Ayuda.jsx'
+import Terminos from './pages/Terminos.jsx'
+import NoEncontrada from './pages/NoEncontrada.jsx'
 
 function App() {
   return (
@@ -37,6 +40,9 @@ function App() {
                 <Route path="/mis-servicios" element={<RutaPrivada><MisServicios /></RutaPrivada>} />
                 <Route path="/mis-servicios/nuevo" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
                 <Route path="/mis-servicios/:id/editar" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
+                <Route path="/ayuda" element={<Ayuda />} />
+                <Route path="/terminos" element={<Terminos />} />
+                <Route path="*" element={<NoEncontrada />} />
               </Routes>
             </main>
             <Footer />
