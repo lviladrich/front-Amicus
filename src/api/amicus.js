@@ -128,6 +128,33 @@ export function listarZonas() {
   return pedir('/zonas')
 }
 
+// Alta, edicion y baja: solo ADMIN (el back responde 403 a cualquier otro rol)
+// datos: { nombre, descripcion }
+export function crearCategoria(datos) {
+  return pedir('/categorias', { metodo: 'POST', cuerpo: datos })
+}
+
+export function actualizarCategoria(id, datos) {
+  return pedir(`/categorias/${id}`, { metodo: 'PUT', cuerpo: datos })
+}
+
+export function eliminarCategoria(id) {
+  return pedir(`/categorias/${id}`, { metodo: 'DELETE' })
+}
+
+// datos: { nombre }
+export function crearZona(datos) {
+  return pedir('/zonas', { metodo: 'POST', cuerpo: datos })
+}
+
+export function actualizarZona(id, datos) {
+  return pedir(`/zonas/${id}`, { metodo: 'PUT', cuerpo: datos })
+}
+
+export function eliminarZona(id) {
+  return pedir(`/zonas/${id}`, { metodo: 'DELETE' })
+}
+
 // ---------- Autenticacion ----------
 export function login(email, password) {
   return pedir('/auth/login', { metodo: 'POST', cuerpo: { email, password } })

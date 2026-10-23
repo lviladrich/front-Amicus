@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ChevronDown, LogOut, Receipt, User, Wrench } from 'lucide-react'
+import { ChevronDown, LogOut, Receipt, Settings, User, Wrench } from 'lucide-react'
 import useSesion from '../../hooks/useSesion.js'
 import { iniciales } from '../../utils/formato.js'
 
@@ -65,6 +65,12 @@ function MenuUsuario() {
             <Wrench size={16} aria-hidden="true" />
             Mis servicios
           </Link>
+          {usuario.rol === 'ADMIN' && (
+            <Link to="/admin" role="menuitem" className="menu-usuario-opcion" onClick={() => setAbierto(false)}>
+              <Settings size={16} aria-hidden="true" />
+              Administración
+            </Link>
+          )}
           <button type="button" role="menuitem" className="menu-usuario-opcion" onClick={salir}>
             <LogOut size={16} aria-hidden="true" />
             Cerrar sesión

@@ -31,11 +31,11 @@ Los errores vienen como `{ estado, error, mensaje, ruta, errores: { campo: mensa
 | Carrito 🔒 | `DELETE /carrito` | carrito vacío |
 | Detalle 🔒 | `POST /servicios/{id}/resenas` `{ puntaje (1-5), comentario? }` | `{ id, puntaje, comentario, fecha, autorId, autor }` |
 | Detalle 🔒 | `DELETE /resenas/{id}` | — (204, solo el autor puede borrar la suya) |
+| Administración 🔒 ADMIN | `POST /categorias` `{ nombre, descripcion? }`, `PUT /categorias/{id}`, `DELETE /categorias/{id}` | categoría (`DELETE`: 204; 409 si algún servicio la usa) |
+| Administración 🔒 ADMIN | `POST /zonas` `{ nombre }`, `PUT /zonas/{id}`, `DELETE /zonas/{id}` | zona (`DELETE`: 204; 409 si algún servicio la usa) |
 
 `frecuencia` es uno de `UNICA`, `SEMANAL`, `QUINCENAL`, `MENSUAL` (ver `FRECUENCIAS` en `src/utils/formato.js`).
 
 ## Todavía sin pantalla
 
-Ver `docs/PENDIENTES.md`: panel del profesional (`GET /servicios/profesional/{id}`, `POST/PUT/DELETE /servicios`,
-`PATCH /servicios/{id}/cupos`, `POST/DELETE /servicios/{id}/imagenes`) y admin de categorías y zonas
-(`POST/PUT/DELETE /categorias` y `/zonas`, solo ADMIN).
+Ya no quedan: Mis servicios cubre el panel del profesional y Administración (`/admin`) cubre categorías y zonas.
