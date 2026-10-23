@@ -4,6 +4,7 @@ import CarritoProvider from './context/CarritoProvider.jsx'
 import Header from './components/layout/Header.jsx'
 import Footer from './components/layout/Footer.jsx'
 import RutaPrivada from './components/comunes/RutaPrivada.jsx'
+import RutaAdmin from './components/comunes/RutaAdmin.jsx'
 import Inicio from './pages/Inicio.jsx'
 import DetalleServicio from './pages/DetalleServicio.jsx'
 import Login from './pages/Login.jsx'
@@ -11,6 +12,7 @@ import Registro from './pages/Registro.jsx'
 import Carrito from './pages/Carrito.jsx'
 import Confirmacion from './pages/Confirmacion.jsx'
 import Perfil from './pages/Perfil.jsx'
+import Admin from './pages/Admin.jsx'
 import MisOrdenes from './pages/MisOrdenes.jsx'
 import DetalleOrdenPage from './pages/DetalleOrdenPage.jsx'
 import MisServicios from './pages/MisServicios.jsx'
@@ -35,6 +37,7 @@ function App() {
                 <Route path="/carrito" element={<RutaPrivada><Carrito /></RutaPrivada>} />
                 <Route path="/ordenes/:id/confirmacion" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
                 <Route path="/perfil" element={<RutaPrivada><Perfil /></RutaPrivada>} />
+                <Route path="/admin" element={<RutaAdmin><Admin /></RutaAdmin>} />
                 <Route path="/ordenes" element={<RutaPrivada><MisOrdenes /></RutaPrivada>} />
                 <Route path="/ordenes/:id" element={<RutaPrivada><DetalleOrdenPage /></RutaPrivada>} />
                 <Route path="/mis-servicios" element={<RutaPrivada><MisServicios /></RutaPrivada>} />
