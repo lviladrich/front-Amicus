@@ -38,4 +38,5 @@ Los errores vienen como `{ estado, error, mensaje, ruta, errores: { campo: mensa
 
 ## Todavía sin pantalla
 
-Ya no quedan: Mis servicios cubre el panel del profesional y Administración (`/admin`) cubre categorías y zonas.
+Solo `GET /categorias/{id}` y `GET /zonas/{id}`, que no hacen falta: `GET /categorias` y `GET /zonas` ya traen todos los
+datos. Mis servicios cubre el panel del profesional y Administración (`/admin`) cubre categorías y zonas.
