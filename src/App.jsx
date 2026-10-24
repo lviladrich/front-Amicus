@@ -14,7 +14,6 @@ import Confirmacion from './pages/Confirmacion.jsx'
 import Perfil from './pages/Perfil.jsx'
 import Admin from './pages/Admin.jsx'
 import MisOrdenes from './pages/MisOrdenes.jsx'
-import DetalleOrdenPage from './pages/DetalleOrdenPage.jsx'
 import MisServicios from './pages/MisServicios.jsx'
 import FormularioServicioPage from './pages/FormularioServicioPage.jsx'
 import Ayuda from './pages/Ayuda.jsx'
@@ -39,7 +38,8 @@ function App() {
                 <Route path="/perfil" element={<RutaPrivada><Perfil /></RutaPrivada>} />
                 <Route path="/admin" element={<RutaAdmin><Admin /></RutaAdmin>} />
                 <Route path="/ordenes" element={<RutaPrivada><MisOrdenes /></RutaPrivada>} />
-                <Route path="/ordenes/:id" element={<RutaPrivada><DetalleOrdenPage /></RutaPrivada>} />
+                {/* Ver una orden desde Mis ordenes usa la misma pagina que la confirmacion de compra */}
+                <Route path="/ordenes/:id" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
                 <Route path="/mis-servicios" element={<RutaPrivada><MisServicios /></RutaPrivada>} />
                 <Route path="/mis-servicios/nuevo" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
                 <Route path="/mis-servicios/:id/editar" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
