@@ -36,9 +36,10 @@ function FormularioServicioPage() {
     }
   }, [id])
 
+  // Se guarda siempre: al publicar, la ruta pasa a /editar pero el componente no se vuelve a montar
   function alGuardar(guardado) {
-    if (id) setServicio(guardado)
-    else navigate(`/mis-servicios/${guardado.id}/editar`, { replace: true })
+    setServicio(guardado)
+    if (!id) navigate(`/mis-servicios/${guardado.id}/editar`, { replace: true })
   }
 
   let contenido
