@@ -165,6 +165,17 @@ export function registrar(datos) {
   return pedir('/auth/registro', { metodo: 'POST', cuerpo: datos })
 }
 
+// Recuperar contraseña. Responde 204 exista o no el email, para no revelar que cuentas hay.
+// El back manda un mail con el link {front}/restablecer?token=...
+export function solicitarRecuperacion(email) {
+  return pedir('/auth/recuperar', { metodo: 'POST', cuerpo: { email } })
+}
+
+// Cambia la contraseña con el token del mail. Responde 204, o 400 si el token es invalido o ya vencio
+export function restablecerPassword(token, password) {
+  return pedir('/auth/restablecer', { metodo: 'POST', cuerpo: { token, password } })
+}
+
 export function obtenerUsuario(id) {
   return pedir(`/auth/usuarios/${id}`)
 }

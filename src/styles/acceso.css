@@ -62,6 +62,27 @@
 .acceso-cruce { margin-top: 1.25rem; text-align: center; font-size: 0.9rem; }
 .acceso-cruce a { font-weight: 600; }
 
+/* Recuperar contraseña */
+.acceso-olvido {
+  align-self: flex-end;
+  margin-top: -0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.acceso-exito {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--pino);
+  border-radius: var(--radio-chico);
+  background: var(--hoja);
+  color: var(--pino);
+}
+.acceso-exito svg { flex-shrink: 0; margin-top: 2px; }
+
 /* Campo de formulario */
 .campo { min-width: 0; }
 

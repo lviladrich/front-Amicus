@@ -9,6 +9,8 @@ import Inicio from './pages/Inicio.jsx'
 import DetalleServicio from './pages/DetalleServicio.jsx'
 import Login from './pages/Login.jsx'
 import Registro from './pages/Registro.jsx'
+import RecuperarPassword from './pages/RecuperarPassword.jsx'
+import RestablecerPassword from './pages/RestablecerPassword.jsx'
 import Carrito from './pages/Carrito.jsx'
 import Confirmacion from './pages/Confirmacion.jsx'
 import Perfil from './pages/Perfil.jsx'
@@ -33,6 +35,8 @@ function App() {
                 <Route path="/servicios/:id" element={<DetalleServicio />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
+                <Route path="/recuperar" element={<RecuperarPassword />} />
+                <Route path="/restablecer" element={<RestablecerPassword />} />
                 <Route path="/carrito" element={<RutaPrivada><Carrito /></RutaPrivada>} />
                 <Route path="/ordenes/:id/confirmacion" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
                 <Route path="/perfil" element={<RutaPrivada><Perfil /></RutaPrivada>} />

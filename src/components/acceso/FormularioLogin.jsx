@@ -69,7 +69,7 @@ function FormularioLogin() {
           onChange={cambiar}
           error={errores.password}
         />
-        {/* TODO (ver docs/PENDIENTES.md): link "Olvidé mi contraseña" (recuperar contraseña) */}
+        <Link to="/recuperar" className="acceso-olvido">Olvidé mi contraseña</Link>
         <button type="submit" className="btn-amicus w-100" disabled={enviando}>
           {enviando ? 'Ingresando...' : 'Ingresar'}
         </button>
