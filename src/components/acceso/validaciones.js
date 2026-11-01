@@ -22,6 +22,22 @@ export function validarLogin({ email, password }) {
   return errores
 }
 
+export function validarRecuperacion({ email }) {
+  const errores = {}
+  const errorEmail = validarEmail(email)
+  if (errorEmail) errores.email = errorEmail
+  return errores
+}
+
+export function validarRestablecer({ password, confirmacion }) {
+  const errores = {}
+  const errorPassword = validarPassword(password)
+  if (errorPassword) errores.password = errorPassword
+  if (!confirmacion) errores.confirmacion = 'Repetí la contraseña nueva.'
+  else if (confirmacion !== password) errores.confirmacion = 'Las contraseñas no coinciden.'
+  return errores
+}
+
 export function validarRegistro({ nombre, apellido, username, email, password }) {
   const errores = {}
   if (!nombre.trim()) errores.nombre = 'Ingresá tu nombre.'

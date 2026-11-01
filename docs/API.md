@@ -18,6 +18,8 @@ Los errores vienen como `{ estado, error, mensaje, ruta, errores: { campo: mensa
 | Detalle | `GET /servicios/{id}/resenas?page` | Página de `{ id, puntaje, comentario, fecha, autorId, autor }` |
 | Login | `POST /auth/login` `{ email, password }` | `{ token, tipo, expiraEnSegundos, usuario{ id, username, email, nombre, apellido, rol } }` |
 | Registro | `POST /auth/registro` `{ username, email, password, nombre, apellido }` | `usuario` (después se hace login automático) |
+| Recuperar contraseña | `POST /auth/recuperar` `{ email }` | `204` siempre (exista o no el email). El back manda un mail con el link `{front}/restablecer?token=...` (sin SMTP configurado, el link sale en la consola del back) |
+| Restablecer contraseña | `POST /auth/restablecer` `{ token, password }` | `204`, o `400` si el token es inválido o venció |
 | Carrito 🔒 | `GET /carrito` | `{ id, usuarioId, items[{ id, servicioId, titulo, precioUnitario, cantidad, frecuencia, subtotal, cuposDisponibles, disponible, profesional, categoria }], total, cantidadDeItems }` |
 | Detalle 🔒 | `POST /carrito/items` `{ servicioId, cantidad, frecuencia }` | carrito |
 | Carrito 🔒 | `PUT /carrito/items/{itemId}` `{ cantidad, frecuencia }` | carrito |

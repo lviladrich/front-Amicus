@@ -12,9 +12,3 @@ llamadas en `src/api/amicus.js`, `useEffect` con loading y error, estilos en `sr
 clases comunes de `src/styles/amicus.css`. Buscá `TODO (ver docs/PENDIENTES.md)` en el código para ver dónde
 engancha cada tarea.
 
-## Bloque A · Cuenta del usuario
-
-### A3. Recuperar contraseña
-- Dónde: `src/components/acceso/FormularioLogin.jsx`.
-- El back no tiene endpoint para esto. Opción mínima: link "Olvidé mi contraseña" a una pantalla informativa.
-  Si se quiere completo, primero hay que agregar el endpoint en back-Amicus.
