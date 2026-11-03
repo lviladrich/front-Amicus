@@ -1,0 +1,32 @@
+/* Perfil publico del profesional */
+.perfil-profesional {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.perfil-profesional-avatar {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  background: var(--pino);
+  color: var(--blanco);
+  font-size: 1.5rem;
+}
+
+.perfil-profesional-datos {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .perfil-profesional { flex-direction: row; align-items: flex-start; }
+  .perfil-profesional-datos { grid-template-columns: 1fr 1fr; }
+}
+
+/* Link al perfil desde el detalle del servicio */
+.profesional-enlace {
+  color: var(--tinta);
+  text-decoration: none;
+}
+.profesional-enlace:hover { color: var(--pino); text-decoration: underline; }

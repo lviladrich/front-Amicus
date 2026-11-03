@@ -22,8 +22,10 @@ uno desde "Crear cuenta".
 
 | Ruta | Pantalla | Sesión |
 |---|---|---|
-| `/` | Inicio: buscador por frase y palabra clave, categorías y servicios paginados | No |
+| `/` | Inicio: buscador por frase y palabra clave, categorías, orden, rango de precio, vistos recientemente y servicios paginados | No |
 | `/servicios/:id` | Detalle del servicio, reseñas y panel de compra | No (para comprar o reseñar, sí) |
+| `/profesionales/:id` | Perfil del profesional: especialidades, zonas y todos sus servicios | No |
+| `/favoritos` | Servicios guardados con el corazón (se guardan en el navegador, por usuario) | Sí |
 | `/login`, `/registro` | Acceso | No |
 | `/carrito` | Carrito: cantidad, frecuencia, quitar y vaciar | Sí |
 | `/ordenes/:id/confirmacion` | Confirmación de compra | Sí |

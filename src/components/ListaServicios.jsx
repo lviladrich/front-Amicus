@@ -4,19 +4,24 @@ import TarjetaServicio from './TarjetaServicio.jsx'
 import Cargando from './comunes/Cargando.jsx'
 import MensajeError from './comunes/MensajeError.jsx'
 import Paginacion from './comunes/Paginacion.jsx'
+import FiltroPrecio from './inicio/FiltroPrecio.jsx'
+import SelectorOrden from './inicio/SelectorOrden.jsx'
 
 const TAMANIO_PAGINA = 12
 
 function ListaServicios({ categoriaId = '', zonaId = '', texto = '' }) {
   const [paginaActual, setPaginaActual] = useState(0)
   const [conCupo, setConCupo] = useState(false)
+  const [orden, setOrden] = useState('titulo')
+  const [precioMin, setPrecioMin] = useState('')
+  const [precioMax, setPrecioMax] = useState('')
   const [intento, setIntento] = useState(0)
   // La respuesta guarda la clave de la busqueda que la origino: si no coincide con la actual, esta cargando
   const [respuesta, setRespuesta] = useState(null)
 
   // Cualquier cambio de filtro vuelve a la primera pagina. Se ajusta durante el render (no en un
   // efecto aparte) para no provocar un pedido de mas con la pagina vieja antes de resetearla.
-  const filtros = `${categoriaId}|${zonaId}|${texto}|${conCupo}`
+  const filtros = `${categoriaId}|${zonaId}|${texto}|${conCupo}|${orden}|${precioMin}|${precioMax}`
   const [filtrosAnteriores, setFiltrosAnteriores] = useState(filtros)
   if (filtros !== filtrosAnteriores) {
     setFiltrosAnteriores(filtros)
@@ -27,7 +32,18 @@ function ListaServicios({ categoriaId = '', zonaId = '', texto = '' }) {
 
   useEffect(() => {
     let vigente = true
-    buscarServicios({ categoriaId, zonaId, q: texto, conCupo, page: paginaActual, size: TAMANIO_PAGINA })
+    buscarServicios({
+      categoriaId,
+      zonaId,
+      q: texto,
+      conCupo,
+      precioMin,
+      precioMax,
+      // El orden alfabetico es el del back por defecto: no hace falta mandarlo
+      orden: orden === 'titulo' ? '' : orden,
+      page: paginaActual,
+      size: TAMANIO_PAGINA,
+    })
       .then((pagina) => {
         if (vigente) setRespuesta({ clave, pagina })
       })
@@ -37,7 +53,12 @@ function ListaServicios({ categoriaId = '', zonaId = '', texto = '' }) {
     return () => {
       vigente = false
     }
-  }, [categoriaId, zonaId, texto, conCupo, paginaActual, clave])
+  }, [categoriaId, zonaId, texto, conCupo, orden, precioMin, precioMax, paginaActual, clave])
+
+  function aplicarPrecio(minimo, maximo) {
+    setPrecioMin(minimo)
+    setPrecioMax(maximo)
+  }
 
   const cargando = respuesta?.clave !== clave
 
@@ -47,7 +68,7 @@ function ListaServicios({ categoriaId = '', zonaId = '', texto = '' }) {
   } else if (respuesta.error) {
     contenido = <MensajeError onReintentar={() => setIntento(intento + 1)}>{respuesta.error}</MensajeError>
   } else if (respuesta.pagina.contenido.length === 0) {
-    contenido = <p className="text-secundario py-4">No encontramos servicios con esos filtros. Probá con otra categoría, barrio o palabra.</p>
+    contenido = <p className="text-secundario py-4">No encontramos servicios con esos filtros. Probá con otra categoría, barrio, palabra o rango de precio.</p>
   } else {
     contenido = (
       <>
@@ -75,7 +96,8 @@ function ListaServicios({ categoriaId = '', zonaId = '', texto = '' }) {
     <section aria-labelledby="titulo-servicios">
       <div className="d-flex flex-wrap justify-content-between align-items-center mt-4 mb-3 gap-2">
         <h2 id="titulo-servicios" className="h4 mb-0">Servicios disponibles</h2>
-        <div className="d-flex align-items-center gap-3">
+        <div className="d-flex flex-wrap align-items-center gap-3">
+          <SelectorOrden valor={orden} onChange={setOrden} />
           <label className="switch-cupo">
             <input
               type="checkbox"
@@ -91,6 +113,7 @@ function ListaServicios({ categoriaId = '', zonaId = '', texto = '' }) {
           )}
         </div>
       </div>
+      <FiltroPrecio minimo={precioMin} maximo={precioMax} onAplicar={aplicarPrecio} />
       {contenido}
     </section>
   )

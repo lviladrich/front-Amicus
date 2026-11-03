@@ -181,3 +181,56 @@
   white-space: nowrap;
 }
 .tarjeta-servicio-profesional + .tarjeta-servicio-dato { margin-top: -0.3rem; }
+
+/* El corazon de favoritos va encima de la tarjeta y no adentro del link
+   (un boton dentro de un <a> no es HTML valido) */
+.tarjeta-servicio-contenedor { position: relative; height: 100%; }
+.tarjeta-servicio-contenedor .boton-favorito { position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2; }
+
+/* Orden y rango de precio del catalogo */
+.selector-orden {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+}
+.selector-orden select {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-chico);
+  background: var(--blanco);
+  color: var(--tinta);
+  font-size: 0.85rem;
+}
+
+.filtro-precio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.filtro-precio-titulo { font-size: 0.85rem; font-weight: 600; color: var(--tinta-suave); }
+.filtro-precio input {
+  width: 7.5rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-chico);
+  background: var(--blanco);
+  font-size: 0.85rem;
+}
+.btn-chico { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+
+/* Vistos recientemente: una fila con scroll horizontal */
+.vistos-fila {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(15rem, 1fr);
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+@media (min-width: 992px) {
+  .vistos-fila { grid-auto-columns: calc((100% - 3rem) / 4); }
+}

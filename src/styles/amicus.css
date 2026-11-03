@@ -249,6 +249,25 @@ a { color: var(--pino); }
   font-weight: 600;
 }
 
+/* ---------- Boton de favoritos ---------- */
+.boton-favorito {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--tinta-suave);
+  box-shadow: var(--sombra);
+  transition: color 0.15s, border-color 0.15s;
+}
+.boton-favorito:hover { color: var(--alerta); border-color: var(--alerta); }
+.boton-favorito-activo { color: var(--alerta); }
+.boton-favorito-texto { width: auto; padding: 0 0.9rem; font-size: 0.85rem; font-weight: 600; }
+
 /* ---------- Mensajes ---------- */
 .alerta-error {
   display: flex;
