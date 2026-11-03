@@ -61,7 +61,8 @@ async function pedir(ruta, { metodo = 'GET', cuerpo } = {}) {
 }
 
 // ---------- Servicios ----------
-// filtros: { categoriaId, zonaId, q, conCupo, page, size }
+// filtros: { categoriaId, zonaId, q, conCupo, precioMin, precioMax, orden, page, size }
+// orden: titulo (por defecto), precio-asc, precio-desc o nuevos
 export async function listarServicios(filtros = {}) {
   const pagina = await buscarServicios(filtros)
   return pagina.contenido
@@ -73,6 +74,11 @@ export function buscarServicios(filtros = {}) {
 
 export function obtenerServicio(id) {
   return pedir(`/servicios/${id}`)
+}
+
+// Publico: lo usa el perfil del profesional (/profesionales/:id)
+export function listarServiciosDeProfesional(profesionalId) {
+  return pedir(`/servicios/profesional/${profesionalId}`)
 }
 
 // ---------- Mis servicios (requiere sesion) ----------
