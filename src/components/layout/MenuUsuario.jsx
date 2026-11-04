@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { ChevronDown, LogOut, Receipt, Settings, User, Wrench } from 'lucide-react'
+import { ChevronDown, Heart, LogOut, Receipt, Settings, User, Wrench } from 'lucide-react'
 import { cerrarSesion, selectUsuario } from '../../store/authSlice.js'
 import { iniciales } from '../../utils/formato.js'
 
@@ -62,6 +62,10 @@ function MenuUsuario() {
           <Link to="/ordenes" role="menuitem" className="menu-usuario-opcion" onClick={() => setAbierto(false)}>
             <Receipt size={16} aria-hidden="true" />
             Mis órdenes
+          </Link>
+          <Link to="/favoritos" role="menuitem" className="menu-usuario-opcion" onClick={() => setAbierto(false)}>
+            <Heart size={16} aria-hidden="true" />
+            Mis favoritos
           </Link>
           <Link to="/mis-servicios" role="menuitem" className="menu-usuario-opcion" onClick={() => setAbierto(false)}>
             <Wrench size={16} aria-hidden="true" />

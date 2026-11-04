@@ -307,3 +307,23 @@ a { color: var(--pino); }
   margin-top: 1.5rem;
 }
 .paginacion .btn-texto { display: inline-flex; align-items: center; gap: 4px; }
+
+/* Corazon de favoritos: en la tarjeta va arriba a la derecha de la imagen, en el detalle al lado del titulo */
+.boton-favorito {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--borde);
+  border-radius: 50%;
+  background: var(--blanco);
+  color: var(--tinta-suave);
+  box-shadow: var(--sombra);
+}
+.boton-favorito:hover { color: var(--alerta); }
+.boton-favorito-activo { color: var(--alerta); border-color: var(--alerta); }
+.boton-favorito:disabled { opacity: 0.6; }
+.tarjeta-servicio-imagen { position: relative; }
+.boton-favorito-tarjeta { position: absolute; top: 0.6rem; right: 0.6rem; }

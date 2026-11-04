@@ -9,6 +9,7 @@ import TarjetaProfesional from '../components/detalle/TarjetaProfesional.jsx'
 import ListaZonas from '../components/detalle/ListaZonas.jsx'
 import ListaResenas from '../components/detalle/ListaResenas.jsx'
 import PanelCompra from '../components/detalle/PanelCompra.jsx'
+import BotonFavorito from '../components/comunes/BotonFavorito.jsx'
 import '../styles/acceso.css'
 import '../styles/detalle.css'
 
@@ -58,7 +59,10 @@ function DetalleServicio() {
         <div className="row g-4">
           <div className="col-12 col-lg-8">
             <GaleriaImagenes imagenes={servicio.imagenes} categoria={servicio.categoria.nombre} titulo={servicio.titulo} />
-            <h1 className="titulo h2 mt-4 mb-0">{servicio.titulo}</h1>
+            <div className="d-flex align-items-start justify-content-between gap-3 mt-4">
+              <h1 className="titulo h2 mb-0">{servicio.titulo}</h1>
+              <BotonFavorito servicioId={servicio.id} titulo={servicio.titulo} />
+            </div>
             <TarjetaProfesional
               profesional={servicio.profesional}
               promedio={servicio.promedioPuntaje}

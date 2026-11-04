@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { MapPin } from 'lucide-react'
 import { estiloCategoria } from '../utils/categorias.js'
 import { formatearPrecio, textoCupos } from '../utils/formato.js'
+import BotonFavorito from './comunes/BotonFavorito.jsx'
 
 // Cuantas zonas se nombran en la tarjeta; el resto se resume como "+N"
 const ZONAS_VISIBLES = 2
@@ -17,6 +18,7 @@ function TarjetaServicio({ servicio }) {
         {servicio.imagenPortada
           ? <img src={servicio.imagenPortada} alt="" loading="lazy" />
           : <Icono size={40} strokeWidth={1.75} aria-hidden="true" />}
+        <BotonFavorito servicioId={servicio.id} titulo={servicio.titulo} className="boton-favorito-tarjeta" />
       </div>
       <div className="tarjeta-servicio-cuerpo">
         <span className="etiqueta align-self-start">{servicio.categoria}</span>
