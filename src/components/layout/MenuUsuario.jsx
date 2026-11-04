@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { ChevronDown, LogOut, Receipt, Settings, User, Wrench } from 'lucide-react'
-import useSesion from '../../hooks/useSesion.js'
+import { cerrarSesion, selectUsuario } from '../../store/authSlice.js'
 import { iniciales } from '../../utils/formato.js'
 
 function MenuUsuario() {
-  const { usuario, cerrarSesion } = useSesion()
+  const usuario = useSelector(selectUsuario)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [abierto, setAbierto] = useState(false)
   const contenedor = useRef(null)
@@ -29,7 +31,7 @@ function MenuUsuario() {
 
   function salir() {
     setAbierto(false)
-    cerrarSesion()
+    dispatch(cerrarSesion())
     navigate('/')
   }
 

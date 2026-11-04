@@ -1,34 +1,27 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { TriangleAlert } from 'lucide-react'
-import { actualizarItemCarrito, quitarItemCarrito } from '../../api/amicus.js'
+import { changeItemFrequency, decItem, incItem, removeFromCart } from '../../store/cartSlice.js'
 import { formatearPrecio } from '../../utils/formato.js'
 import { estiloCategoria } from '../../utils/categorias.js'
 import SelectorFrecuencia from './SelectorFrecuencia.jsx'
 import StepperCantidad from './StepperCantidad.jsx'
 import MensajeError from '../comunes/MensajeError.jsx'
 
-// Cada respuesta del back es el carrito completo: se la pasamos a onActualizado
-function ItemCarrito({ item, onActualizado }) {
+function ItemCarrito({ item }) {
+  const dispatch = useDispatch()
   const [enviando, setEnviando] = useState(false)
   const [error, setError] = useState('')
   const { fondo, Icono } = estiloCategoria(item.categoria)
 
+  // El store se actualiza solo con el carrito que devuelve el back; aca solo manejamos el error del item
   function ejecutar(accion) {
     setEnviando(true)
     setError('')
-    accion()
-      .then((carritoActualizado) => {
-        onActualizado(carritoActualizado)
-        setEnviando(false)
-      })
-      .catch((fallo) => {
-        setError(fallo.message)
-        setEnviando(false)
-      })
-  }
-
-  function cambiar(cantidad, frecuencia) {
-    ejecutar(() => actualizarItemCarrito(item.id, cantidad, frecuencia))
+    dispatch(accion)
+      .unwrap()
+      .catch((fallo) => setError(fallo.mensaje))
+      .finally(() => setEnviando(false))
   }
 
   return (
@@ -46,13 +39,13 @@ function ItemCarrito({ item, onActualizado }) {
           <StepperCantidad
             valor={item.cantidad}
             maximo={item.cuposDisponibles}
-            onChange={(cantidad) => cambiar(cantidad, item.frecuencia)}
+            onChange={(cantidad) => ejecutar(cantidad > item.cantidad ? incItem(item) : decItem(item))}
             deshabilitado={enviando}
           />
           <SelectorFrecuencia
             id={`frecuencia-${item.id}`}
             valor={item.frecuencia}
-            onChange={(frecuencia) => cambiar(item.cantidad, frecuencia)}
+            onChange={(frecuencia) => ejecutar(changeItemFrequency({ item, frecuencia }))}
             deshabilitado={enviando}
           />
         </div>
@@ -69,7 +62,7 @@ function ItemCarrito({ item, onActualizado }) {
         <button
           type="button"
           className="btn-texto carrito-quitar"
-          onClick={() => ejecutar(() => quitarItemCarrito(item.id))}
+          onClick={() => ejecutar(removeFromCart(item.id))}
           disabled={enviando}
           aria-label={`Quitar ${item.titulo} del carrito`}
         >

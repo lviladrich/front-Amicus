@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { eliminarResena, listarResenas, obtenerServicio } from '../../api/amicus.js'
-import useSesion from '../../hooks/useSesion.js'
+import { useSelector } from 'react-redux'
+import { selectUsuario } from '../../store/authSlice.js'
 import Cargando from '../comunes/Cargando.jsx'
 import MensajeError from '../comunes/MensajeError.jsx'
 import Paginacion from '../comunes/Paginacion.jsx'
@@ -10,7 +11,7 @@ import Resena from './Resena.jsx'
 // onResumenActualizado es opcional: DetalleServicio lo usa para refrescar el promedio y la
 // cantidad que muestra arriba del todo, sin tener que recargar la pantalla entera.
 function ListaResenas({ servicioId, promedio, cantidad, onResumenActualizado }) {
-  const { usuario } = useSesion()
+  const usuario = useSelector(selectUsuario)
   const [pagina, setPagina] = useState(0)
   const [intento, setIntento] = useState(0)
   // La respuesta guarda la clave del pedido que la origino: si no coincide con la actual, esta cargando

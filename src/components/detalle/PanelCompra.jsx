@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { agregarAlCarrito } from '../../api/amicus.js'
-import useSesion from '../../hooks/useSesion.js'
-import useCarrito from '../../hooks/useCarrito.js'
+import { selectUsuario } from '../../store/authSlice.js'
+import { addToCart } from '../../store/cartSlice.js'
 import { formatearPrecio, textoCupos } from '../../utils/formato.js'
 import MensajeError from '../comunes/MensajeError.jsx'
 import SelectorFrecuencia from './SelectorFrecuencia.jsx'
@@ -10,8 +10,8 @@ import SelectorCantidad from './SelectorCantidad.jsx'
 import BotonAgregar from './BotonAgregar.jsx'
 
 function PanelCompra({ servicio }) {
-  const { usuario } = useSesion()
-  const { setCarrito } = useCarrito()
+  const usuario = useSelector(selectUsuario)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const [frecuencia, setFrecuencia] = useState('UNICA')
@@ -27,11 +27,10 @@ function PanelCompra({ servicio }) {
     setEnviando(true)
     setError('')
     try {
-      const carrito = await agregarAlCarrito(servicio.id, cantidad, frecuencia)
-      setCarrito(carrito)
+      await dispatch(addToCart({ servicioId: servicio.id, cantidad, frecuencia })).unwrap()
       navigate('/carrito')
     } catch (e) {
-      setError(e.message)
+      setError(e.mensaje)
       setEnviando(false)
     }
   }

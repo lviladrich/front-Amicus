@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { login, registrar } from '../../api/amicus.js'
-import useSesion from '../../hooks/useSesion.js'
+import { registro } from '../../store/authSlice.js'
 import Campo from './Campo.jsx'
 import MensajeError from '../comunes/MensajeError.jsx'
 import { validarRegistro } from './validaciones.js'
@@ -13,7 +13,7 @@ function FormularioRegistro() {
   const [errores, setErrores] = useState({})
   const [errorGeneral, setErrorGeneral] = useState('')
   const [enviando, setEnviando] = useState(false)
-  const { iniciarSesion } = useSesion()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   function cambiar(evento) {
@@ -38,14 +38,11 @@ function FormularioRegistro() {
       email: valores.email.trim(),
     }
     try {
-      await registrar(datos)
-      // Despues de crear la cuenta entramos directo, sin pedirle que vuelva a escribir los datos
-      const respuesta = await login(datos.email, datos.password)
-      iniciarSesion(respuesta)
+      await dispatch(registro(datos)).unwrap()
       navigate('/', { replace: true })
     } catch (error) {
-      setErrores(error.errores ?? {})
-      setErrorGeneral(error.message)
+      setErrores(error.errores)
+      setErrorGeneral(error.mensaje)
       setEnviando(false)
     }
   }

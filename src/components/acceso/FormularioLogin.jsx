@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { login } from '../../api/amicus.js'
-import useSesion from '../../hooks/useSesion.js'
+import { limpiarAvisoSesion, login, selectAvisoSesion } from '../../store/authSlice.js'
 import Campo from './Campo.jsx'
 import MensajeError from '../comunes/MensajeError.jsx'
 import { validarLogin } from './validaciones.js'
@@ -11,14 +11,15 @@ function FormularioLogin() {
   const [errores, setErrores] = useState({})
   const [errorGeneral, setErrorGeneral] = useState('')
   const [enviando, setEnviando] = useState(false)
-  const { iniciarSesion, avisoSesion, limpiarAvisoSesion } = useSesion()
+  const dispatch = useDispatch()
+  const avisoSesion = useSelector(selectAvisoSesion)
   const navigate = useNavigate()
   const location = useLocation()
 
   // El aviso solo tiene que verse una vez: se limpia apenas se muestra esta pantalla
   useEffect(() => {
-    return () => limpiarAvisoSesion()
-  }, [limpiarAvisoSesion])
+    return () => dispatch(limpiarAvisoSesion())
+  }, [dispatch])
 
   function cambiar(evento) {
     const { name, value } = evento.target
@@ -35,12 +36,11 @@ function FormularioLogin() {
 
     setEnviando(true)
     try {
-      const respuesta = await login(valores.email.trim(), valores.password)
-      iniciarSesion(respuesta)
+      await dispatch(login({ email: valores.email.trim(), password: valores.password })).unwrap()
       navigate(location.state?.desde || '/', { replace: true })
     } catch (error) {
-      setErrores(error.errores ?? {})
-      setErrorGeneral(error.message)
+      setErrores(error.errores)
+      setErrorGeneral(error.mensaje)
       setEnviando(false)
     }
   }

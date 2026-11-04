@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { ShoppingCart } from 'lucide-react'
-import useCarrito from '../../hooks/useCarrito.js'
+import { useSelector } from 'react-redux'
+import { selectCartCount } from '../../store/cartSlice.js'
 
 function BotonCarrito() {
-  const { carrito } = useCarrito()
-  const cantidad = carrito?.cantidadDeItems ?? 0
+  const cantidad = useSelector(selectCartCount)
 
   return (
     <Link to="/carrito" className="nav-enlace d-inline-flex align-items-center gap-1">

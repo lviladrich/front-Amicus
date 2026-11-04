@@ -1,14 +1,15 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { confirmarCompra } from '../../api/amicus.js'
-import useCarrito from '../../hooks/useCarrito.js'
+import { fetchCart } from '../../store/cartSlice.js'
 import { formatearPrecio } from '../../utils/formato.js'
 import MensajeError from '../comunes/MensajeError.jsx'
 
 function ResumenCarrito({ carrito }) {
   const [enviando, setEnviando] = useState(false)
   const [error, setError] = useState('')
-  const { refrescarCarrito } = useCarrito()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const sinCupo = carrito.items.some((item) => !item.disponible)
@@ -18,7 +19,8 @@ function ResumenCarrito({ carrito }) {
     setError('')
     try {
       const orden = await confirmarCompra()
-      await refrescarCarrito()
+      // El checkout vacia el carrito en el back: lo traemos de nuevo para que el contador vuelva a 0
+      await dispatch(fetchCart())
       navigate(`/ordenes/${orden.id}/confirmacion`)
     } catch (fallo) {
       setError(fallo.message)

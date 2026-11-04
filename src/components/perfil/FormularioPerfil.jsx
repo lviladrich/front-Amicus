@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { actualizarPerfil, obtenerUsuario } from '../../api/amicus.js'
-import useSesion from '../../hooks/useSesion.js'
+import { actualizarUsuario, selectUsuario } from '../../store/authSlice.js'
 import Campo from '../acceso/Campo.jsx'
 import Cargando from '../comunes/Cargando.jsx'
 import MensajeError from '../comunes/MensajeError.jsx'
@@ -8,7 +9,8 @@ import { validarPerfil } from '../acceso/validaciones.js'
 
 // Pide los datos propios al back (no los toma de la sesion guardada) para mostrar siempre lo ultimo persistido
 function FormularioPerfil() {
-  const { usuario, actualizarUsuario } = useSesion()
+  const usuario = useSelector(selectUsuario)
+  const dispatch = useDispatch()
   const [valores, setValores] = useState(null)
   const [errores, setErrores] = useState({})
   const [errorGeneral, setErrorGeneral] = useState('')
@@ -52,7 +54,7 @@ function FormularioPerfil() {
     }
     try {
       const usuarioActualizado = await actualizarPerfil(usuario.id, datos)
-      actualizarUsuario(usuarioActualizado)
+      dispatch(actualizarUsuario(usuarioActualizado))
       setValores({
         nombre: usuarioActualizado.nombre,
         apellido: usuarioActualizado.apellido,
