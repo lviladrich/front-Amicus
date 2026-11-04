@@ -3,6 +3,7 @@ import { listarCategorias, listarZonas } from '../api/amicus.js'
 import BuscadorFrase from '../components/inicio/BuscadorFrase.jsx'
 import FiltroCategorias from '../components/inicio/FiltroCategorias.jsx'
 import ListaServicios from '../components/ListaServicios.jsx'
+import VistosRecientemente from '../components/inicio/VistosRecientemente.jsx'
 import MensajeError from '../components/comunes/MensajeError.jsx'
 import '../styles/inicio.css'
 
@@ -75,6 +76,7 @@ function Inicio() {
       </section>
 
       <section className="container py-4">
+        <VistosRecientemente />
         <FiltroCategorias categorias={categorias} categoriaId={categoriaId} onElegir={elegirCategoria} />
         <ListaServicios categoriaId={categoriaId} zonaId={zonaId} texto={texto} />
       </section>

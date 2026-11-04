@@ -1,4 +1,7 @@
-import { Wrench, Zap, Paintbrush, Sparkles, Hammer, Leaf, Flame, Snowflake, KeyRound, Truck, House } from 'lucide-react'
+import {
+  Wrench, Zap, Paintbrush, Sparkles, Hammer, Leaf, Flame, Snowflake, KeyRound, Truck, House,
+  BrickWall, WashingMachine, Bug, Umbrella,
+} from 'lucide-react'
 
 // Color de fondo e icono propios de cada categoria (segun la maqueta)
 const ESTILOS = {
@@ -12,6 +15,10 @@ const ESTILOS = {
   'aire acondicionado': { fondo: '#DDEBF3', Icono: Snowflake },
   cerrajeria: { fondo: '#E6E6E1', Icono: KeyRound },
   mudanzas: { fondo: '#EFE6D0', Icono: Truck },
+  albanileria: { fondo: '#F1E1D8', Icono: BrickWall },
+  electrodomesticos: { fondo: '#E3E7F1', Icono: WashingMachine },
+  fumigacion: { fondo: '#E4ECD6', Icono: Bug },
+  techos: { fondo: '#E0E4E8', Icono: Umbrella },
 }
 
 const ESTILO_POR_DEFECTO = { fondo: '#DCE9E2', Icono: House }

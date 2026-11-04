@@ -5,37 +5,38 @@ import { Heart } from 'lucide-react'
 import { selectUsuario } from '../../store/authSlice.js'
 import { addFavorito, removeFavorito, selectEsFavorito } from '../../store/favoritosSlice.js'
 
-function BotonFavorito({ servicioId, titulo, className = '' }) {
+function BotonFavorito({ servicioId, conTexto = false }) {
   const usuario = useSelector(selectUsuario)
-  const esFavorito = useSelector(selectEsFavorito(servicioId))
+  const activo = useSelector(selectEsFavorito(servicioId))
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const [enviando, setEnviando] = useState(false)
 
-  function alternar(evento) {
-    // Puede estar dentro de la tarjeta, que es un link: el clic no tiene que abrir el detalle
-    evento.preventDefault()
-    evento.stopPropagation()
+  function alHacerClic() {
     if (!usuario) {
       navigate('/login', { state: { desde: location.pathname } })
       return
     }
     setEnviando(true)
-    dispatch(esFavorito ? removeFavorito(servicioId) : addFavorito(servicioId))
+    dispatch(activo ? removeFavorito(servicioId) : addFavorito(servicioId))
       .finally(() => setEnviando(false))
   }
+
+  const etiqueta = activo ? 'Quitar de favoritos' : 'Guardar en favoritos'
 
   return (
     <button
       type="button"
-      className={`boton-favorito ${esFavorito ? 'boton-favorito-activo' : ''} ${className}`}
-      onClick={alternar}
+      className={`boton-favorito${activo ? ' boton-favorito-activo' : ''}${conTexto ? ' boton-favorito-texto' : ''}`}
+      aria-pressed={activo}
+      aria-label={conTexto ? undefined : etiqueta}
+      title={etiqueta}
+      onClick={alHacerClic}
       disabled={enviando}
-      aria-pressed={esFavorito}
-      aria-label={esFavorito ? `Quitar ${titulo} de favoritos` : `Guardar ${titulo} en favoritos`}
     >
-      <Heart size={18} aria-hidden="true" fill={esFavorito ? 'currentColor' : 'none'} />
+      <Heart size={18} fill={activo ? 'currentColor' : 'none'} aria-hidden="true" />
+      {conTexto && <span>{activo ? 'Guardado' : 'Guardar'}</span>}
     </button>
   )
 }

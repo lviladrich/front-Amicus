@@ -7,25 +7,28 @@ import MensajeError from '../components/comunes/MensajeError.jsx'
 import TarjetaServicio from '../components/TarjetaServicio.jsx'
 import '../styles/inicio.css'
 
-function MisFavoritos() {
+function Favoritos() {
   const dispatch = useDispatch()
   const favoritos = useSelector(selectFavoritos)
   const { estado, error } = useSelector((state) => state.favoritos)
   const [intento, setIntento] = useState(0)
 
-  // Al entrar se vuelve a pedir: un servicio guardado pudo haberse dado de baja
+  // Al entrar se vuelve a pedir: un servicio guardado pudo haberse dado de baja o cambiado de precio
   useEffect(() => {
     dispatch(fetchFavoritos())
   }, [intento, dispatch])
 
   let contenido
-  if (estado === 'cargando' && favoritos.length === 0) contenido = <Cargando texto="Cargando tus favoritos..." />
-  else if (estado === 'error') {
+  if (estado === 'cargando' && favoritos.length === 0) {
+    contenido = <Cargando texto="Cargando tus favoritos..." />
+  } else if (estado === 'error') {
     contenido = <MensajeError onReintentar={() => setIntento(intento + 1)}>{error?.mensaje}</MensajeError>
   } else if (favoritos.length === 0) {
     contenido = (
       <div className="py-4">
-        <p className="text-secundario">Todavía no guardaste ningún servicio. Tocá el corazón de una tarjeta para tenerlo a mano acá.</p>
+        <p className="text-secundario">
+          Todavía no guardaste ningún servicio. Tocá el corazón de un servicio para tenerlo a mano acá.
+        </p>
         <Link to="/" className="btn-amicus">Ver servicios</Link>
       </div>
     )
@@ -49,4 +52,4 @@ function MisFavoritos() {
   )
 }
 
-export default MisFavoritos
+export default Favoritos

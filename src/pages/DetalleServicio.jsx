@@ -10,8 +10,11 @@ import ListaZonas from '../components/detalle/ListaZonas.jsx'
 import ListaResenas from '../components/detalle/ListaResenas.jsx'
 import PanelCompra from '../components/detalle/PanelCompra.jsx'
 import BotonFavorito from '../components/comunes/BotonFavorito.jsx'
+import { resumenDeDetalle } from '../utils/servicios.js'
+import { registrarVisto } from '../utils/vistos.js'
 import '../styles/acceso.css'
 import '../styles/detalle.css'
+import '../styles/profesional.css'
 
 function DetalleServicio() {
   const { id } = useParams()
@@ -24,7 +27,10 @@ function DetalleServicio() {
     let vigente = true
     obtenerServicio(id)
       .then((servicio) => {
-        if (vigente) setRespuesta({ clave, servicio })
+        if (!vigente) return
+        setRespuesta({ clave, servicio })
+        // Para la fila "Vistos recientemente" del inicio
+        registrarVisto(resumenDeDetalle(servicio))
       })
       .catch((error) => {
         if (vigente) setRespuesta({ clave, error })
@@ -59,9 +65,9 @@ function DetalleServicio() {
         <div className="row g-4">
           <div className="col-12 col-lg-8">
             <GaleriaImagenes imagenes={servicio.imagenes} categoria={servicio.categoria.nombre} titulo={servicio.titulo} />
-            <div className="d-flex align-items-start justify-content-between gap-3 mt-4">
+            <div className="d-flex justify-content-between align-items-start gap-3 mt-4">
               <h1 className="titulo h2 mb-0">{servicio.titulo}</h1>
-              <BotonFavorito servicioId={servicio.id} titulo={servicio.titulo} />
+              <BotonFavorito servicioId={servicio.id} conTexto />
             </div>
             <TarjetaProfesional
               profesional={servicio.profesional}

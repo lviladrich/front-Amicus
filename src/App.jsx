@@ -15,9 +15,10 @@ import Confirmacion from './pages/Confirmacion.jsx'
 import Perfil from './pages/Perfil.jsx'
 import Admin from './pages/Admin.jsx'
 import MisOrdenes from './pages/MisOrdenes.jsx'
-import MisFavoritos from './pages/MisFavoritos.jsx'
 import MisServicios from './pages/MisServicios.jsx'
 import FormularioServicioPage from './pages/FormularioServicioPage.jsx'
+import Favoritos from './pages/Favoritos.jsx'
+import PerfilProfesional from './pages/PerfilProfesional.jsx'
 import Ayuda from './pages/Ayuda.jsx'
 import Terminos from './pages/Terminos.jsx'
 import NoEncontrada from './pages/NoEncontrada.jsx'
@@ -32,6 +33,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/servicios/:id" element={<DetalleServicio />} />
+            <Route path="/profesionales/:id" element={<PerfilProfesional />} />
+            <Route path="/favoritos" element={<RutaPrivada><Favoritos /></RutaPrivada>} />
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
             <Route path="/recuperar" element={<RecuperarPassword />} />
@@ -41,7 +44,6 @@ function App() {
             <Route path="/perfil" element={<RutaPrivada><Perfil /></RutaPrivada>} />
             <Route path="/admin" element={<RutaAdmin><Admin /></RutaAdmin>} />
             <Route path="/ordenes" element={<RutaPrivada><MisOrdenes /></RutaPrivada>} />
-            <Route path="/favoritos" element={<RutaPrivada><MisFavoritos /></RutaPrivada>} />
             {/* Ver una orden desde Mis ordenes usa la misma pagina que la confirmacion de compra */}
             <Route path="/ordenes/:id" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
             <Route path="/mis-servicios" element={<RutaPrivada><MisServicios /></RutaPrivada>} />

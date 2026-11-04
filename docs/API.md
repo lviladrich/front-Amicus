@@ -11,10 +11,11 @@ Los errores vienen como `{ estado, error, mensaje, ruta, errores: { campo: mensa
 
 | Pantalla | Método y ruta | Respuesta |
 |---|---|---|
-| Inicio | `GET /servicios?categoriaId&zonaId&q&conCupo&page&size` | Página de `{ id, titulo, precio, cuposDisponibles, disponible, categoria, imagenPortada, profesional, zonas[] }` (`profesional` es "Nombre Apellido" y `zonas` son los nombres) |
+| Inicio | `GET /servicios?categoriaId&zonaId&q&conCupo&precioMin&precioMax&orden&page&size` (`orden`: titulo, precio-asc, precio-desc o nuevos) | Página de `{ id, titulo, precio, cuposDisponibles, disponible, categoria, imagenPortada, profesional, zonas[] }` (`profesional` es "Nombre Apellido" y `zonas` son los nombres) |
 | Inicio | `GET /categorias` | `[{ id, nombre, descripcion }]` |
 | Inicio | `GET /zonas` | `[{ id, nombre }]` |
 | Detalle | `GET /servicios/{id}` | `{ id, titulo, descripcion, precio, cuposDisponibles, disponible, fechaPublicacion, categoria{id,nombre}, profesional{id,username,nombre,apellido}, imagenes[{id,url}], zonas[{id,nombre}], promedioPuntaje, cantidadResenas }` |
+| Perfil del profesional | `GET /servicios/profesional/{id}` | Lista de resúmenes (mismo formato que el catálogo) |
 | Detalle | `GET /servicios/{id}/resenas?page` | Página de `{ id, puntaje, comentario, fecha, autorId, autor }` |
 | Login | `POST /auth/login` `{ email, password }` | `{ token, tipo, expiraEnSegundos, usuario{ id, username, email, nombre, apellido, rol } }` |
 | Registro | `POST /auth/registro` `{ username, email, password, nombre, apellido }` | `usuario` (después se hace login automático) |
