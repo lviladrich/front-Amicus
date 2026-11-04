@@ -62,7 +62,7 @@ export const login = pedidoAlBack('auth/login', async ({ email, password }, { di
   const respuesta = await pedirLogin(email, password)
   dispatch(iniciarSesion(respuesta))
   return respuesta.usuario
-})
+}, { mismaSesion: false })
 
 // Despues de crear la cuenta entra directo, sin pedirle que vuelva a escribir los datos
 export const registro = pedidoAlBack('auth/registro', async (datos, { dispatch }) => {
@@ -70,7 +70,7 @@ export const registro = pedidoAlBack('auth/registro', async (datos, { dispatch }
   const respuesta = await pedirLogin(datos.email, datos.password)
   dispatch(iniciarSesion(respuesta))
   return respuesta.usuario
-})
+}, { mismaSesion: false })
 
 export const selectUsuario = (state) => state.auth.usuario
 export const selectAvisoSesion = (state) => state.auth.avisoSesion

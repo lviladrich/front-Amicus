@@ -29,6 +29,8 @@ const favoritosSlice = createSlice({
         state.estado = 'listo'
       })
       .addCase(fetchFavoritos.rejected, (state, action) => {
+        // Una respuesta descartada por cambio de sesion no es un error para mostrar
+        if (action.payload?.descartado) return
         state.estado = 'error'
         state.error = action.payload
       })
