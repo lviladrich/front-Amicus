@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { listarMisServicios } from '../api/amicus.js'
-import useSesion from '../hooks/useSesion.js'
+import { useSelector } from 'react-redux'
+import { selectUsuario } from '../store/authSlice.js'
 import Cargando from '../components/comunes/Cargando.jsx'
 import MensajeError from '../components/comunes/MensajeError.jsx'
 import TarjetaMiServicio from '../components/misServicios/TarjetaMiServicio.jsx'
 import '../styles/misServicios.css'
 
 function MisServicios() {
-  const { usuario } = useSesion()
+  const usuario = useSelector(selectUsuario)
   const [intento, setIntento] = useState(0)
   // La respuesta guarda la clave del pedido que la origino: si no coincide con la actual, esta cargando
   const [respuesta, setRespuesta] = useState(null)

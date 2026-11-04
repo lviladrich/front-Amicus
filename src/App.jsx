@@ -1,11 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import SesionProvider from './context/SesionProvider.jsx'
-import CarritoProvider from './context/CarritoProvider.jsx'
-import FavoritosProvider from './context/FavoritosProvider.jsx'
 import Header from './components/layout/Header.jsx'
 import Footer from './components/layout/Footer.jsx'
 import RutaPrivada from './components/comunes/RutaPrivada.jsx'
 import RutaAdmin from './components/comunes/RutaAdmin.jsx'
+import SincronizarUsuario from './components/comunes/SincronizarUsuario.jsx'
 import Inicio from './pages/Inicio.jsx'
 import DetalleServicio from './pages/DetalleServicio.jsx'
 import Login from './pages/Login.jsx'
@@ -28,41 +26,36 @@ import NoEncontrada from './pages/NoEncontrada.jsx'
 function App() {
   return (
     <BrowserRouter>
-      <SesionProvider>
-        <CarritoProvider>
-          <FavoritosProvider>
-            <div className="d-flex flex-column min-vh-100">
-              <Header />
-              <main className="flex-grow-1 d-flex flex-column">
-                <Routes>
-                  <Route path="/" element={<Inicio />} />
-                  <Route path="/servicios/:id" element={<DetalleServicio />} />
-                  <Route path="/profesionales/:id" element={<PerfilProfesional />} />
-                  <Route path="/favoritos" element={<RutaPrivada><Favoritos /></RutaPrivada>} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/registro" element={<Registro />} />
-                  <Route path="/recuperar" element={<RecuperarPassword />} />
-                  <Route path="/restablecer" element={<RestablecerPassword />} />
-                  <Route path="/carrito" element={<RutaPrivada><Carrito /></RutaPrivada>} />
-                  <Route path="/ordenes/:id/confirmacion" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
-                  <Route path="/perfil" element={<RutaPrivada><Perfil /></RutaPrivada>} />
-                  <Route path="/admin" element={<RutaAdmin><Admin /></RutaAdmin>} />
-                  <Route path="/ordenes" element={<RutaPrivada><MisOrdenes /></RutaPrivada>} />
-                  {/* Ver una orden desde Mis ordenes usa la misma pagina que la confirmacion de compra */}
-                  <Route path="/ordenes/:id" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
-                  <Route path="/mis-servicios" element={<RutaPrivada><MisServicios /></RutaPrivada>} />
-                  <Route path="/mis-servicios/nuevo" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
-                  <Route path="/mis-servicios/:id/editar" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
-                  <Route path="/ayuda" element={<Ayuda />} />
-                  <Route path="/terminos" element={<Terminos />} />
-                  <Route path="*" element={<NoEncontrada />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          </FavoritosProvider>
-        </CarritoProvider>
-      </SesionProvider>
+      <SincronizarUsuario />
+      <div className="d-flex flex-column min-vh-100">
+        <Header />
+        <main className="flex-grow-1 d-flex flex-column">
+          <Routes>
+            <Route path="/" element={<Inicio />} />
+            <Route path="/servicios/:id" element={<DetalleServicio />} />
+            <Route path="/profesionales/:id" element={<PerfilProfesional />} />
+            <Route path="/favoritos" element={<RutaPrivada><Favoritos /></RutaPrivada>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Registro />} />
+            <Route path="/recuperar" element={<RecuperarPassword />} />
+            <Route path="/restablecer" element={<RestablecerPassword />} />
+            <Route path="/carrito" element={<RutaPrivada><Carrito /></RutaPrivada>} />
+            <Route path="/ordenes/:id/confirmacion" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
+            <Route path="/perfil" element={<RutaPrivada><Perfil /></RutaPrivada>} />
+            <Route path="/admin" element={<RutaAdmin><Admin /></RutaAdmin>} />
+            <Route path="/ordenes" element={<RutaPrivada><MisOrdenes /></RutaPrivada>} />
+            {/* Ver una orden desde Mis ordenes usa la misma pagina que la confirmacion de compra */}
+            <Route path="/ordenes/:id" element={<RutaPrivada><Confirmacion /></RutaPrivada>} />
+            <Route path="/mis-servicios" element={<RutaPrivada><MisServicios /></RutaPrivada>} />
+            <Route path="/mis-servicios/nuevo" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
+            <Route path="/mis-servicios/:id/editar" element={<RutaPrivada><FormularioServicioPage /></RutaPrivada>} />
+            <Route path="/ayuda" element={<Ayuda />} />
+            <Route path="/terminos" element={<Terminos />} />
+            <Route path="*" element={<NoEncontrada />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </BrowserRouter>
   )
 }

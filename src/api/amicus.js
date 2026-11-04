@@ -216,6 +216,20 @@ export function vaciarCarrito() {
   return pedir('/carrito', { metodo: 'DELETE' })
 }
 
+// ---------- Favoritos (requiere sesion) ----------
+// Los tres devuelven la lista completa de servicios favoritos
+export function listarFavoritos() {
+  return pedir('/favoritos')
+}
+
+export function agregarFavorito(servicioId) {
+  return pedir(`/favoritos/${servicioId}`, { metodo: 'POST' })
+}
+
+export function quitarFavorito(servicioId) {
+  return pedir(`/favoritos/${servicioId}`, { metodo: 'DELETE' })
+}
+
 // ---------- Ordenes (requiere sesion) ----------
 // filtros: { page, size }
 export function listarOrdenes(filtros = {}) {

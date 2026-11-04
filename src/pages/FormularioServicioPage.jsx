@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { obtenerServicio } from '../api/amicus.js'
-import useSesion from '../hooks/useSesion.js'
+import { useSelector } from 'react-redux'
+import { selectUsuario } from '../store/authSlice.js'
 import Cargando from '../components/comunes/Cargando.jsx'
 import MensajeError from '../components/comunes/MensajeError.jsx'
 import FormularioServicio from '../components/misServicios/FormularioServicio.jsx'
@@ -12,7 +13,7 @@ import '../styles/misServicios.css'
 // Sin :id es "publicar"; con :id es "editar" (carga el servicio existente primero)
 function FormularioServicioPage() {
   const { id } = useParams()
-  const { usuario } = useSesion()
+  const usuario = useSelector(selectUsuario)
   const navigate = useNavigate()
   const [servicio, setServicio] = useState(null)
   const [cargando, setCargando] = useState(Boolean(id))

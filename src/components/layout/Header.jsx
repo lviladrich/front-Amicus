@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom'
 import Logo from './Logo.jsx'
 import BotonCarrito from './BotonCarrito.jsx'
 import MenuUsuario from './MenuUsuario.jsx'
-import useSesion from '../../hooks/useSesion.js'
+import { useSelector } from 'react-redux'
+import { selectUsuario } from '../../store/authSlice.js'
 
 function Header() {
-  const { usuario } = useSesion()
+  const usuario = useSelector(selectUsuario)
 
   return (
     <header className="header">

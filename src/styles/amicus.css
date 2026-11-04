@@ -266,6 +266,7 @@ a { color: var(--pino); }
 }
 .boton-favorito:hover { color: var(--alerta); border-color: var(--alerta); }
 .boton-favorito-activo { color: var(--alerta); }
+.boton-favorito:disabled { opacity: 0.6; }
 .boton-favorito-texto { width: auto; padding: 0 0.9rem; font-size: 0.85rem; font-weight: 600; }
 
 /* ---------- Mensajes ---------- */

@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import { vaciarCarrito } from '../../api/amicus.js'
+import { useDispatch } from 'react-redux'
+import { clearCart } from '../../store/cartSlice.js'
 import ModalConfirmacion from '../comunes/ModalConfirmacion.jsx'
 import MensajeError from '../comunes/MensajeError.jsx'
 import ItemCarrito from './ItemCarrito.jsx'
 
-function ListaCarrito({ items, onActualizado }) {
+function ListaCarrito({ items }) {
+  const dispatch = useDispatch()
   const [modalAbierto, setModalAbierto] = useState(false)
   const [vaciando, setVaciando] = useState(false)
   const [error, setError] = useState('')
@@ -13,11 +15,10 @@ function ListaCarrito({ items, onActualizado }) {
     setVaciando(true)
     setError('')
     try {
-      const carritoVacio = await vaciarCarrito()
-      onActualizado(carritoVacio)
+      await dispatch(clearCart()).unwrap()
       setModalAbierto(false)
     } catch (fallo) {
-      setError(fallo.message)
+      setError(fallo.mensaje)
     } finally {
       setVaciando(false)
     }
@@ -33,7 +34,7 @@ function ListaCarrito({ items, onActualizado }) {
       <MensajeError>{error}</MensajeError>
       <ul className="carrito-lista" aria-label="Servicios en tu carrito">
         {items.map((item) => (
-          <ItemCarrito key={item.id} item={item} onActualizado={onActualizado} />
+          <ItemCarrito key={item.id} item={item} />
         ))}
       </ul>
       {modalAbierto && (
